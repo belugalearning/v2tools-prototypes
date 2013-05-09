@@ -9,8 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-@interface MyCocos2DClass : NSObject {
-    
+@interface Pin : NSObject {
+    CCSprite * sprite;
+    int x;
+    int y;
 }
 
 @end

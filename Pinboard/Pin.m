@@ -6,9 +6,16 @@
 //  Copyright 2013 __MyCompanyName__. All rights reserved.
 //
 
-#import "MyCocos2DClass.h"
+#import "Pin.h"
 
 
-@implementation MyCocos2DClass
+@implementation Pin
+
+-(id)init {
+    if (self = [super init]) {
+        sprite = [CCSprite spriteWithFile:@"pin.png"];
+    }
+    return self;
+}
 
 @end
