@@ -9,6 +9,11 @@
 
 // Import the interfaces
 #import "PinboardLayer.h"
+#import "Pinboard.h"
+#import "SquarePinboard.h"
+#import "TrianglePinboard.h"
+#import "CircularPinboard.h"
+#import "Pin.h"
 
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
@@ -40,24 +45,23 @@
 	// always call "super" init
 	// Apple recommends to re-assign "self" with the "super's" return value
 	if( (self=[super init]) ) {
-		
+        
+        director = [CCDirector sharedDirector];
+		size = [director winSize];
+        
+        [self setupPinboard];
+        
+        
 	}
 	return self;
 }
 
-// on "dealloc" you need to release all your retained objects
+-(void)setupPinboard {
+    pinboard = [CircularPinboard pinboard];
+    [pinboard setPosition:ccp(size.width/2, size.height/2)];
+    [pinboard addToNode:self];
+}
 
 #pragma mark GameKit delegate
 
--(void) achievementViewControllerDidFinish:(GKAchievementViewController *)viewController
-{
-	AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-	[[app navController] dismissModalViewControllerAnimated:YES];
-}
-
--(void) leaderboardViewControllerDidFinish:(GKLeaderboardViewController *)viewController
-{
-	AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-	[[app navController] dismissModalViewControllerAnimated:YES];
-}
 @end

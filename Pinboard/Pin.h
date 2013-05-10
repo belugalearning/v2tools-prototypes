@@ -10,9 +10,19 @@
 #import "cocos2d.h"
 
 @interface Pin : NSObject {
-    CCSprite * sprite;
-    int x;
-    int y;
+
 }
+
+@property (readwrite) CCSprite * sprite;
+@property (readwrite) int x;
+@property (readwrite) int y;
+@property (readwrite) int circleIndex;
+@property (readwrite) BOOL colour;
+
+-(void)addToNode:(CCNode *)node;
+-(void)setPosition:(CGPoint)point;
++(id)pin;
++(id)pinWithX:(int)x andY:(int)y;
++(id)pinWithCircleIndex:(int)index;
 
 @end

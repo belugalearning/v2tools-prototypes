@@ -12,12 +12,16 @@
 // When you import this file, you import all the cocos2d classes
 #import "cocos2d.h"
 
-// HelloWorldLayer
-@interface PinboardLayer : CCLayer <GKAchievementViewControllerDelegate, GKLeaderboardViewControllerDelegate>
+@class Pinboard;
+@interface PinboardLayer : CCLayer
 {
+    Pinboard * pinboard;
+    
+    CCDirector * director;
+    CGSize size;
 }
 
-// returns a CCScene that contains the HelloWorldLayer as the only child
+// returns a CCScene that contains the PinboardLayer as the only child
 +(CCScene *) scene;
 
 @end

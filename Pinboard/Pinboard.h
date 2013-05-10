@@ -16,25 +16,17 @@ typedef enum {
     circular_with_pin
 } LatticeType;
 
+@class Pin;
 @interface Pinboard : NSObject {
-    CCSprite * background;
-    LatticeType * latticeType;
 }
 
-@end
+@property (readwrite) NSMutableArray * pins;
+@property (readwrite) CCSprite * background;
 
-@interface RegularPinboard : Pinboard
-
-@end
-
-@interface SquarePinboard : RegularPinboard
-
-@end
-
-@interface TrianglePinboard : RegularPinboard
-
-@end
-
-@interface CircularPinboard : Pinboard
+-(void)addToNode:(CCNode *)node;
+-(void)setPosition:(CGPoint)position;
+-(void)setupPins;
+-(void)addPinsToBackground;
++(id)pinboard;
 
 @end
