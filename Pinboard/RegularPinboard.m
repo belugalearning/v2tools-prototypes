@@ -26,7 +26,7 @@
 
 -(id)init {
     if (self = [super init]) {
-        self.distanceBetweenPins = 30;
+        self.distanceBetweenPins = 20;
     }
     return self;
 }

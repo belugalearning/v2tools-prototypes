@@ -14,6 +14,7 @@
 #import "TrianglePinboard.h"
 #import "CircularPinboard.h"
 #import "Pin.h"
+#import "Band.h"
 
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
@@ -50,6 +51,14 @@
 		size = [director winSize];
         
         [self setupPinboard];
+         
+        Band * band = [Band alloc];
+        Pin * firstPin = [pinboard.pins objectAtIndex:0];
+        Pin * secondPin = [pinboard.pins objectAtIndex:4];
+        Pin * thirdPin = [pinboard.pins objectAtIndex:6];
+        Pin * fourthPin = [pinboard.pins objectAtIndex:17];
+        NSMutableArray * pins = [NSMutableArray arrayWithObjects:firstPin, secondPin, thirdPin, fourthPin, nil];
+        band = [band initWithPinboard:pinboard andPins:pins];
         
         
 	}

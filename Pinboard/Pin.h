@@ -24,5 +24,6 @@
 +(id)pin;
 +(id)pinWithX:(int)x andY:(int)y;
 +(id)pinWithCircleIndex:(int)index;
+-(void)drawLineTo:(Pin *)destinationPin;
 
 @end

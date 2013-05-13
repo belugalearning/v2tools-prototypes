@@ -18,7 +18,7 @@
     if (self = [super init]) {
         self.radius = 100;
         self.numberOfPins = 20;
-        self.includeCentre = NO;
+        self.includeCentre = YES;
         [self setupPins];
     }
     return self;

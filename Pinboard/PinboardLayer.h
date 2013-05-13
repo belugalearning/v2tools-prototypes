@@ -13,6 +13,7 @@
 #import "cocos2d.h"
 
 @class Pinboard;
+@class Band;
 @interface PinboardLayer : CCLayer
 {
     Pinboard * pinboard;
