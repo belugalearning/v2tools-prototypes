@@ -143,7 +143,6 @@
 		F387B827173CF858007EC6AA /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = F387B826173CF858007EC6AA /* pin.png */; };
 		F387B82A173D5002007EC6AA /* Band.m in Sources */ = {isa = PBXBuildFile; fileRef = F387B829173D5002007EC6AA /* Band.m */; };
 		F387B82C173D585C007EC6AA /* bandPart.png in Resources */ = {isa = PBXBuildFile; fileRef = F387B82B173D585C007EC6AA /* bandPart.png */; };
-		F399BC831741417100CDB5D7 /* CCSprite_SpriteTouches.m in Sources */ = {isa = PBXBuildFile; fileRef = F399BC821741417100CDB5D7 /* CCSprite_SpriteTouches.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -426,8 +425,6 @@
 		F387B828173D5002007EC6AA /* Band.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Band.h; sourceTree = "<group>"; };
 		F387B829173D5002007EC6AA /* Band.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Band.m; sourceTree = "<group>"; };
 		F387B82B173D585C007EC6AA /* bandPart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bandPart.png; sourceTree = "<group>"; };
-		F399BC81174140FE00CDB5D7 /* CCSprite_SpriteTouches.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSprite_SpriteTouches.h; sourceTree = "<group>"; };
-		F399BC821741417100CDB5D7 /* CCSprite_SpriteTouches.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCSprite_SpriteTouches.m; path = ../CCSprite_SpriteTouches.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -453,8 +450,8 @@
 		F38772C4173BD1040087F831 = {
 			isa = PBXGroup;
 			children = (
-				F38772CF173BD1040087F831 /* Frameworks */,
 				F38772E2173BD1050087F831 /* Pinboard */,
+				F38772CF173BD1040087F831 /* Frameworks */,
 				F38772CE173BD1040087F831 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -488,8 +485,6 @@
 			children = (
 				F387745A173BD1060087F831 /* AppDelegate.h */,
 				F387745B173BD1060087F831 /* AppDelegate.m */,
-				F399BC81174140FE00CDB5D7 /* CCSprite_SpriteTouches.h */,
-				F399BC821741417100CDB5D7 /* CCSprite_SpriteTouches.m */,
 				F3877479173BE6EB0087F831 /* CircularPinboard.h */,
 				F387747A173BE6EB0087F831 /* CircularPinboard.m */,
 				F387B828173D5002007EC6AA /* Band.h */,
@@ -1068,7 +1063,6 @@
 				F3877478173BE6D30087F831 /* TrianglePinboard.m in Sources */,
 				F387747B173BE6EB0087F831 /* CircularPinboard.m in Sources */,
 				F387B82A173D5002007EC6AA /* Band.m in Sources */,
-				F399BC831741417100CDB5D7 /* CCSprite_SpriteTouches.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
