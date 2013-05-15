@@ -109,6 +109,7 @@
         if ([pin.sprite touched:touchLocation]) {
             [self unpinBandFromPin:i];
             pinSelected = YES;
+            
             break;
         }
     }
@@ -137,12 +138,14 @@
     Pin * nextPin = bandPart.toPin;
     int movingPinIndex = [self.pins indexOfObject:nextPin];
     [self.pins insertObject:movingPin atIndex:movingPinIndex];
-    [self addBandPartFrom:previousPin to:movingPin withIndex:index + 1];
-    [self addBandPartFrom:movingPin to:nextPin withIndex:index + 1];
+        [self.bandParts removeObjectAtIndex:index];
+        [self addBandPartFrom:movingPin to:nextPin withIndex:index];
+    [self addBandPartFrom:previousPin to:movingPin withIndex:index];
+
     entryPart = [self.bandParts objectAtIndex:index];
     exitPart = [self.bandParts objectAtIndex:index + 1];
     [bandPart.sprite.parent removeFromParentAndCleanup:YES];
-    [self.bandParts removeObjectAtIndex:index];
+
 }
 
 -(void)unpinBandFromPin:(int)index {
@@ -213,5 +216,23 @@
     [self.pins replaceObjectAtIndex:movingPinIndex withObject:pin];
     [self setPositionAndRotationOfBandParts];
 }
+
+-(void)removeMovingPin {
+    Pin * fromPin = entryPart.fromPin;
+    Pin * toPin = exitPart.toPin;
+    
+    [self.bandParts removeObject:entryPart];
+    [self.bandParts removeObject:exitPart];
+    [self.pins removeObject:movingPin];
+    [entryPart.sprite removeFromParentAndCleanup:YES];
+    [exitPart.sprite removeFromParentAndCleanup:YES];
+    [movingPin.sprite removeFromParentAndCleanup:YES];
+    
+    int index = [self.pins indexOfObject:fromPin];
+    [self addBandPartFrom:fromPin to:toPin withIndex:index];
+    [self setPositionAndRotationOfBandParts];
+
+}
+
 
 @end

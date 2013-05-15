@@ -32,5 +32,6 @@
 -(void)processEnd:(CGPoint)touchLocation;
 -(void)pinBandOnPin:(Pin *)pin;
 -(void)setupBand;
+-(void)removeMovingPin;
 
 @end

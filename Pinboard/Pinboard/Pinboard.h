@@ -34,5 +34,6 @@ typedef enum {
 -(void)processTouch:(CGPoint)touchLocation;
 -(void)processMove:(CGPoint)touchLocation;
 -(void)processEnd:(CGPoint)touchLocation;
+-(void)setMovingBand:(Band *)band;
 
 @end

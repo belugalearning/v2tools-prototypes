@@ -57,8 +57,8 @@
 -(void)processTouch:(CGPoint)touchLocation {
     for (int i = 0; i < [self.bands count]; i++) {
         Band * band = [self.bands objectAtIndex:i];
-        movingBand = band;
         [band processTouch:touchLocation];
+        movingBand = band;
     }
 }
 
@@ -80,11 +80,15 @@
             }
         }
         if (!placedOnPin) {
-            //[movingBand removeMovingPin];
+            [movingBand removeMovingPin];
         }
         [movingBand processEnd:touchLocation];
     }
     movingBand = nil;
+}
+
+-(void)setMovingBand:(Band *)band {
+    movingBand = band;
 }
 
 @end

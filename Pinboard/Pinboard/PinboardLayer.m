@@ -90,65 +90,7 @@
     CGPoint touchLocation = [self convertTouchToNodeSpace:touch];
     [pinboard processEnd:touchLocation];
 }
-/*
--(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    CGPoint touchLocation = [self convertTouchToNodeSpace:touch];
-    
-    for (Band * band in pinboard.bands) {
-        for (int i = 0; i < [band.pins count]; i++) {
-            Pin * pin = [band.pins objectAtIndex:i];
-            if ([pin.sprite touched:touchLocation]) {
-                movingBand = band;
-                adjacentPins = [band pinsAdjacentToPin:i];
-                [band processTouchToPin:i];
-                break;
-            }
-        }
-        
-        if (movingBand != nil) {
-            break;
-        }
-    
-        for (int i = 0; i < [band.bandParts count]; i++) {
-            BandPart * bandPart = [band.bandParts objectAtIndex:i];
-            if ([bandPart.sprite touched:touchLocation]) {
-                movingBand = band;
-                adjacentPins = bandPart.adjacentPins;
-                [band processTouchToBandPart:bandPart at:touchLocation];
-                break;
-            }
-        }
-        
-        if (movingBand != nil) {
-            break;
-        }
-    }
-    return YES;
-}
 
--(void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
-    CGPoint touchLocation = [self convertTouchToNodeSpace:touch];
-    if (movingBand != nil) {
-        [movingBand processMove:touchLocation];
-    }
-}
-
--(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
-    CGPoint touchLocation = [self convertTouchToNodeSpace:touch];
-    if (movingBand != nil) {
-        for (Pin * pin in pinboard.pins) {
-            if ([pin.sprite touched:touchLocation]) {
-                [movingBand placeBandOnPin:pin];
-            }
-        }
-    }
-    
-    
-    
-    
-    movingBand = nil;
-}
-*/
 #pragma mark GameKit delegate
 
 @end
