@@ -8,9 +8,12 @@
 
 #import "Pinboard.h"
 #import "Pin.h"
+#import "Band.h"
+#import "CCSprite_SpriteTouchExtensions.h"
 
-
-@implementation Pinboard
+@implementation Pinboard {
+    Band * movingBand;
+}
 
 @synthesize background = background_, pins = pins_;
 
@@ -18,6 +21,7 @@
     if (self = [super init]) {
         self.background = [CCSprite spriteWithFile:@"background.png"];
         self.pins = [NSMutableArray array];
+        self.bands = [NSMutableArray array];
     }
     return self;
 }
@@ -43,6 +47,44 @@
 
 -(void)setupPins {
     [self addPinsToBackground];
+}
+
+-(void)addBand:(Band *)band {
+    [band setPinboard:self];
+    [self.bands addObject:band];
+}
+
+-(void)processTouch:(CGPoint)touchLocation {
+    for (int i = 0; i < [self.bands count]; i++) {
+        Band * band = [self.bands objectAtIndex:i];
+        movingBand = band;
+        [band processTouch:touchLocation];
+    }
+}
+
+-(void)processMove:(CGPoint)touchLocation {
+    if (movingBand != nil) {
+        touchLocation = [self.background convertToNodeSpace:touchLocation];
+        [movingBand processMove:touchLocation];
+    }
+}
+
+-(void)processEnd:(CGPoint)touchLocation {
+    if (movingBand != nil) {
+        BOOL placedOnPin = NO;
+        for (int i = 0; i < [self.pins count]; i++) {
+            Pin * pin = [self.pins objectAtIndex:i];
+            if ([pin.sprite touched:touchLocation]) {
+                [movingBand pinBandOnPin:pin];
+                placedOnPin = YES;
+            }
+        }
+        if (!placedOnPin) {
+            //[movingBand removeMovingPin];
+        }
+        [movingBand processEnd:touchLocation];
+    }
+    movingBand = nil;
 }
 
 @end

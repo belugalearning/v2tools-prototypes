@@ -95,6 +95,7 @@
     int timeInMinutes = 60 * timeToSet.hours + timeToSet.minutes;
     minuteHand.rotation = timeInMinutes * 6;
     hourHand.rotation = timeInMinutes * 1/2;
+
 }
 
 -(void)processHandMove:(CGPoint)touchLocation isHour:(BOOL)isHour {

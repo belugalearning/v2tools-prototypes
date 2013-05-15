@@ -14,12 +14,17 @@
 
 @class Pinboard;
 @class Band;
+@class Pin;
+@class BandPart;
 @interface PinboardLayer : CCLayer
 {
     Pinboard * pinboard;
-    
     CCDirector * director;
     CGSize size;
+    
+    Band * movingBand;
+    NSArray * adjacentPins;
+    Pin * movingPin;
 }
 
 // returns a CCScene that contains the PinboardLayer as the only child

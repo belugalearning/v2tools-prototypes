@@ -13,7 +13,7 @@
 
 -(BOOL)isTouching:(CGPoint)touchLocation {
     CGPoint relativeTouch = [sprite.parent convertToNodeSpace:touchLocation];
-    return CGRectContainsPoint(sprite.boundingBox, relativeTouch);;
+    return CGRectContainsPoint(sprite.boundingBox, relativeTouch);
 }
 
 -(void)processTouch {

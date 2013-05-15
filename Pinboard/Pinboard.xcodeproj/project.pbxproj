@@ -143,6 +143,8 @@
 		F387B827173CF858007EC6AA /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = F387B826173CF858007EC6AA /* pin.png */; };
 		F387B82A173D5002007EC6AA /* Band.m in Sources */ = {isa = PBXBuildFile; fileRef = F387B829173D5002007EC6AA /* Band.m */; };
 		F387B82C173D585C007EC6AA /* bandPart.png in Resources */ = {isa = PBXBuildFile; fileRef = F387B82B173D585C007EC6AA /* bandPart.png */; };
+		F3C9DDDB17424CDC0016FDEA /* CCSprite_SpriteTouchExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F3C9DDDA17424CDC0016FDEA /* CCSprite_SpriteTouchExtensions.m */; };
+		F3C9DDDE174257910016FDEA /* BandPart.m in Sources */ = {isa = PBXBuildFile; fileRef = F3C9DDDD174257910016FDEA /* BandPart.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -425,6 +427,10 @@
 		F387B828173D5002007EC6AA /* Band.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Band.h; sourceTree = "<group>"; };
 		F387B829173D5002007EC6AA /* Band.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Band.m; sourceTree = "<group>"; };
 		F387B82B173D585C007EC6AA /* bandPart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bandPart.png; sourceTree = "<group>"; };
+		F3C9DDD717424BA40016FDEA /* CCSprite_SpriteTouchExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSprite_SpriteTouchExtensions.h; sourceTree = "<group>"; };
+		F3C9DDDA17424CDC0016FDEA /* CCSprite_SpriteTouchExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCSprite_SpriteTouchExtensions.m; path = ../CCSprite_SpriteTouchExtensions.m; sourceTree = "<group>"; };
+		F3C9DDDC174257910016FDEA /* BandPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BandPart.h; sourceTree = "<group>"; };
+		F3C9DDDD174257910016FDEA /* BandPart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BandPart.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -450,8 +456,8 @@
 		F38772C4173BD1040087F831 = {
 			isa = PBXGroup;
 			children = (
-				F38772E2173BD1050087F831 /* Pinboard */,
 				F38772CF173BD1040087F831 /* Frameworks */,
+				F38772E2173BD1050087F831 /* Pinboard */,
 				F38772CE173BD1040087F831 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -489,6 +495,8 @@
 				F387747A173BE6EB0087F831 /* CircularPinboard.m */,
 				F387B828173D5002007EC6AA /* Band.h */,
 				F387B829173D5002007EC6AA /* Band.m */,
+				F3C9DDDC174257910016FDEA /* BandPart.h */,
+				F3C9DDDD174257910016FDEA /* BandPart.m */,
 				F3877460173BD1060087F831 /* IntroLayer.h */,
 				F3877461173BD1060087F831 /* IntroLayer.m */,
 				F38772FD173BD1050087F831 /* libs */,
@@ -498,6 +506,8 @@
 				F387746E173BDB190087F831 /* Pinboard.m */,
 				F387745D173BD1060087F831 /* PinboardLayer.h */,
 				F387745E173BD1060087F831 /* PinboardLayer.m */,
+				F3C9DDDA17424CDC0016FDEA /* CCSprite_SpriteTouchExtensions.m */,
+				F3C9DDD717424BA40016FDEA /* CCSprite_SpriteTouchExtensions.h */,
 				F3877470173BE6970087F831 /* RegularPinboard.h */,
 				F3877471173BE6970087F831 /* RegularPinboard.m */,
 				F38772E3173BD1050087F831 /* Resources */,
@@ -1063,6 +1073,8 @@
 				F3877478173BE6D30087F831 /* TrianglePinboard.m in Sources */,
 				F387747B173BE6EB0087F831 /* CircularPinboard.m in Sources */,
 				F387B82A173D5002007EC6AA /* Band.m in Sources */,
+				F3C9DDDB17424CDC0016FDEA /* CCSprite_SpriteTouchExtensions.m in Sources */,
+				F3C9DDDE174257910016FDEA /* BandPart.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

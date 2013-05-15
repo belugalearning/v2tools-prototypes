@@ -17,7 +17,7 @@
 -(id)init {
     if (self = [super init]) {
         self.radius = 100;
-        self.numberOfPins = 20;
+        self.numberOfPins = 4;
         self.includeCentre = YES;
         [self setupPins];
     }

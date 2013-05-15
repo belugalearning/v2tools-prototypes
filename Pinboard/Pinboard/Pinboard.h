@@ -17,16 +17,22 @@ typedef enum {
 } LatticeType;
 
 @class Pin;
+@class Band;
 @interface Pinboard : NSObject {
 }
 
 @property (readwrite) NSMutableArray * pins;
 @property (readwrite) CCSprite * background;
+@property (readwrite) NSMutableArray * bands;
 
 -(void)addToNode:(CCNode *)node;
 -(void)setPosition:(CGPoint)position;
 -(void)setupPins;
 -(void)addPinsToBackground;
 +(id)pinboard;
+-(void)addBand:(Band *)band;
+-(void)processTouch:(CGPoint)touchLocation;
+-(void)processMove:(CGPoint)touchLocation;
+-(void)processEnd:(CGPoint)touchLocation;
 
 @end

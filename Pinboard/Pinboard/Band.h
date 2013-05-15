@@ -10,6 +10,9 @@
 #import "cocos2d.h"
 
 @class Pinboard;
+@class Pin;
+@class Band;
+@class BandPart;
 @interface Band : NSObject {
     
 }
@@ -18,8 +21,16 @@
 @property (readwrite) NSMutableArray * bandParts;
 @property (readwrite) Pinboard * pinboard;
 @property (readwrite) ccColor3B colour;
+@property (readwrite) CCNode * bandNode;
 
--(void)drawBand;
 -(id)initWithPinboard:(Pinboard *)pinboard andPins:(NSMutableArray *)pins;
++(id)bandWithPinboard:(Pinboard *)pinboard andPins:(NSMutableArray *)pins;
+-(NSArray *)pinsAdjacentToPin:(int)pinIndex;
+-(NSArray *)pinsAdjacentToBandPart:(int)bandPartIndex;
+-(void)processTouch:(CGPoint)touchLocation;
+-(void)processMove:(CGPoint)touchLocation;
+-(void)processEnd:(CGPoint)touchLocation;
+-(void)pinBandOnPin:(Pin *)pin;
+-(void)setupBand;
 
 @end

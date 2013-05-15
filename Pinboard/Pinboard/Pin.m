@@ -15,7 +15,7 @@
 -(id)init {
     if (self = [super init]) {
         self.sprite = [CCSprite spriteWithFile:@"pin.png"];
-        self.sprite.scale = 0.5;
+        //self.sprite.scale = 0.5;
     }
     return self;
 }
