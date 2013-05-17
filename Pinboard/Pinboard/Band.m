@@ -34,8 +34,6 @@
         int green = arc4random_uniform(255);
         int blue = arc4random_uniform(255);
         self.colour = ccc3(red, green, blue);
-
-         
     }
     return self;
     
@@ -105,7 +103,11 @@
     for (int i = 0; i < [self.pins count]; i++) {
         Pin * pin = [self.pins objectAtIndex:i];
         if ([pin.sprite touched:touchLocation]) {
-            [self unpinBandFromPin:i];
+            if ([self.pins count] > 1) {
+                [self unpinBandFromPin:i];
+            } else {
+                [self splitBandPart:0 at:touchLocation];
+            }
             pinSelected = YES;
             [self.pinboard setMovingBand:self];
             break;
@@ -230,20 +232,22 @@
 }
 
 -(void)cleanPins {
-    int numberOfPins = [self.pins count];
-    NSMutableIndexSet * repeatPinsIndexes = [NSMutableIndexSet indexSet];
-    for (int i = 0; i < numberOfPins; i++) {
-        Pin * currentPin = [self.pins objectAtIndex:i];
-        Pin * nextPin = [self.pins objectAtIndex:(i + 1)%numberOfPins];
-        if (currentPin == nextPin) {
-            [repeatPinsIndexes addIndex:i];
-            BandPart * bandPart = [self.bandParts objectAtIndex:i];
-            [bandPart.sprite.parent removeFromParentAndCleanup:YES];
+    if ([self.pins count] > 1) {
+        int numberOfPins = [self.pins count];
+        NSMutableIndexSet * repeatPinsIndexes = [NSMutableIndexSet indexSet];
+        for (int i = 0; i < numberOfPins; i++) {
+            Pin * currentPin = [self.pins objectAtIndex:i];
+            Pin * nextPin = [self.pins objectAtIndex:(i + 1)%numberOfPins];
+            if (currentPin == nextPin) {
+                [repeatPinsIndexes addIndex:i];
+                BandPart * bandPart = [self.bandParts objectAtIndex:i];
+                [bandPart.sprite.parent removeFromParentAndCleanup:YES];
+            }
         }
-    
+        [self.pins removeObjectsAtIndexes:repeatPinsIndexes];
+        [self.bandParts removeObjectsAtIndexes:repeatPinsIndexes];
     }
-    [self.pins removeObjectsAtIndexes:repeatPinsIndexes];
-    [self.bandParts removeObjectsAtIndexes:repeatPinsIndexes];
+    
     /*
     numberOfPins = [self.pins count];
     NSMutableIndexSet * straightThroughPinsIndexes = [NSMutableIndexSet indexSet];
