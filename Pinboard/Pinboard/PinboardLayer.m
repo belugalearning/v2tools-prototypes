@@ -58,9 +58,16 @@
         Pin * secondPin = [pinboard.pins objectAtIndex:2];
         Pin * thirdPin = [pinboard.pins objectAtIndex:3];
         Pin * fourthPin = [pinboard.pins objectAtIndex:4];
+        //Pin * fifthPin = [pinboard.pins objectAtIndex:5];
+        //Pin * sixthPin = [pinboard.pins objectAtIndex:6];
         NSMutableArray * pins = [NSMutableArray arrayWithObjects:firstPin, secondPin, thirdPin, fourthPin, nil];
         Band * band = [Band bandWithPinboard:pinboard andPins:pins];
         [band setupBand];
+        
+        
+
+        
+        
         
         [[director touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
 	}

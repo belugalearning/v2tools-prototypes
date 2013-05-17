@@ -58,7 +58,6 @@
     for (int i = 0; i < [self.bands count]; i++) {
         Band * band = [self.bands objectAtIndex:i];
         [band processTouch:touchLocation];
-        movingBand = band;
     }
 }
 

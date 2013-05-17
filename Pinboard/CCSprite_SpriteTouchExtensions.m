@@ -12,6 +12,7 @@
 
 -(BOOL)touched:(CGPoint)touch {
     CGPoint theTouch = [self.parent convertToNodeSpace:touch];
+    CGRect box = self.boundingBox;
     return CGRectContainsPoint(self.boundingBox, theTouch);
 }
 
