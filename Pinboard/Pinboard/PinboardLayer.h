@@ -25,6 +25,8 @@
     Band * movingBand;
     NSArray * adjacentPins;
     Pin * movingPin;
+    CCMenuItemToggle * centrePinOnButton;
+    CCMenuItemToggle * centrePinOffButton;
 }
 
 // returns a CCScene that contains the PinboardLayer as the only child

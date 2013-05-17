@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F3875C84174651BD00A176B2 /* squareLatticeButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F3875C81174651BD00A176B2 /* squareLatticeButton.png */; };
+		F3875C85174651BD00A176B2 /* triangularLatticeButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F3875C82174651BD00A176B2 /* triangularLatticeButton.png */; };
+		F3875C86174651BD00A176B2 /* circularButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F3875C83174651BD00A176B2 /* circularButton.png */; };
+		F3875C8B1746697200A176B2 /* newBandButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F3875C8A1746697200A176B2 /* newBandButton.png */; };
 		F38772D1173BD1040087F831 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F38772D0173BD1040087F831 /* QuartzCore.framework */; };
 		F38772D3173BD1040087F831 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F38772D2173BD1040087F831 /* OpenGLES.framework */; };
 		F38772D5173BD1050087F831 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F38772D4173BD1040087F831 /* OpenAL.framework */; };
@@ -143,11 +147,18 @@
 		F387B827173CF858007EC6AA /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = F387B826173CF858007EC6AA /* pin.png */; };
 		F387B82A173D5002007EC6AA /* Band.m in Sources */ = {isa = PBXBuildFile; fileRef = F387B829173D5002007EC6AA /* Band.m */; };
 		F387B82C173D585C007EC6AA /* bandPart.png in Resources */ = {isa = PBXBuildFile; fileRef = F387B82B173D585C007EC6AA /* bandPart.png */; };
+		F3924502174671760061C477 /* centrePinButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F39244FF174671760061C477 /* centrePinButton.png */; };
+		F3924503174671760061C477 /* addPinButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F3924500174671760061C477 /* addPinButton.png */; };
+		F3924504174671760061C477 /* minusPinButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F3924501174671760061C477 /* minusPinButton.png */; };
 		F3C9DDDB17424CDC0016FDEA /* CCSprite_SpriteTouchExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F3C9DDDA17424CDC0016FDEA /* CCSprite_SpriteTouchExtensions.m */; };
 		F3C9DDDE174257910016FDEA /* BandPart.m in Sources */ = {isa = PBXBuildFile; fileRef = F3C9DDDD174257910016FDEA /* BandPart.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F3875C81174651BD00A176B2 /* squareLatticeButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = squareLatticeButton.png; sourceTree = "<group>"; };
+		F3875C82174651BD00A176B2 /* triangularLatticeButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = triangularLatticeButton.png; sourceTree = "<group>"; };
+		F3875C83174651BD00A176B2 /* circularButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circularButton.png; sourceTree = "<group>"; };
+		F3875C8A1746697200A176B2 /* newBandButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newBandButton.png; sourceTree = "<group>"; };
 		F38772CD173BD1040087F831 /* Pinboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pinboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F38772D0173BD1040087F831 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F38772D2173BD1040087F831 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -427,6 +438,9 @@
 		F387B828173D5002007EC6AA /* Band.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Band.h; sourceTree = "<group>"; };
 		F387B829173D5002007EC6AA /* Band.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Band.m; sourceTree = "<group>"; };
 		F387B82B173D585C007EC6AA /* bandPart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bandPart.png; sourceTree = "<group>"; };
+		F39244FF174671760061C477 /* centrePinButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = centrePinButton.png; sourceTree = "<group>"; };
+		F3924500174671760061C477 /* addPinButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addPinButton.png; sourceTree = "<group>"; };
+		F3924501174671760061C477 /* minusPinButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = minusPinButton.png; sourceTree = "<group>"; };
 		F3C9DDD717424BA40016FDEA /* CCSprite_SpriteTouchExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSprite_SpriteTouchExtensions.h; sourceTree = "<group>"; };
 		F3C9DDDA17424CDC0016FDEA /* CCSprite_SpriteTouchExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCSprite_SpriteTouchExtensions.m; path = ../CCSprite_SpriteTouchExtensions.m; sourceTree = "<group>"; };
 		F3C9DDDC174257910016FDEA /* BandPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BandPart.h; sourceTree = "<group>"; };
@@ -524,7 +538,14 @@
 			isa = PBXGroup;
 			children = (
 				F38772E4173BD1050087F831 /* Default.png */,
+				F3875C81174651BD00A176B2 /* squareLatticeButton.png */,
+				F3875C82174651BD00A176B2 /* triangularLatticeButton.png */,
+				F39244FF174671760061C477 /* centrePinButton.png */,
+				F3924500174671760061C477 /* addPinButton.png */,
+				F3924501174671760061C477 /* minusPinButton.png */,
+				F3875C83174651BD00A176B2 /* circularButton.png */,
 				F38772E6173BD1050087F831 /* Default-Landscape~ipad.png */,
+				F3875C8A1746697200A176B2 /* newBandButton.png */,
 				F38772E8173BD1050087F831 /* fps_images.png */,
 				F38772EA173BD1050087F831 /* fps_images-hd.png */,
 				F387B826173CF858007EC6AA /* pin.png */,
@@ -952,6 +973,13 @@
 				F387747D173BF0510087F831 /* background.png in Resources */,
 				F387B827173CF858007EC6AA /* pin.png in Resources */,
 				F387B82C173D585C007EC6AA /* bandPart.png in Resources */,
+				F3875C84174651BD00A176B2 /* squareLatticeButton.png in Resources */,
+				F3875C85174651BD00A176B2 /* triangularLatticeButton.png in Resources */,
+				F3875C86174651BD00A176B2 /* circularButton.png in Resources */,
+				F3875C8B1746697200A176B2 /* newBandButton.png in Resources */,
+				F3924502174671760061C477 /* centrePinButton.png in Resources */,
+				F3924503174671760061C477 /* addPinButton.png in Resources */,
+				F3924504174671760061C477 /* minusPinButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -18,4 +18,7 @@
 @property (readwrite) int numberOfPins;
 @property (readwrite) BOOL includeCentre;
 
+-(id)initWithCentre:(BOOL)includeCentre pins:(int)numberOfPins;
++(id)pinboardWithCentre:(BOOL)includeCentre pins:(int)numberOfPins;
+
 @end

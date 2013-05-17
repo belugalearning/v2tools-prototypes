@@ -24,7 +24,10 @@
 #pragma mark - HelloWorldLayer
 
 // HelloWorldLayer implementation
-@implementation PinboardLayer
+@implementation PinboardLayer {
+    int circularNumberOfPins;
+    BOOL circularIncludeCentre;
+}
 
 // Helper class method that creates a Scene with the HelloWorldLayer as the only child.
 +(CCScene *) scene
@@ -52,22 +55,43 @@
         director = [CCDirector sharedDirector];
 		size = [director winSize];
         
+        pinboard = [SquarePinboard pinboard];
         [self setupPinboard];
-         
-        Pin * firstPin = [pinboard.pins objectAtIndex:1];
-        Pin * secondPin = [pinboard.pins objectAtIndex:2];
-        Pin * thirdPin = [pinboard.pins objectAtIndex:3];
-        Pin * fourthPin = [pinboard.pins objectAtIndex:4];
-        //Pin * fifthPin = [pinboard.pins objectAtIndex:5];
-        //Pin * sixthPin = [pinboard.pins objectAtIndex:6];
-        NSMutableArray * pins = [NSMutableArray arrayWithObjects:firstPin, secondPin, thirdPin, fourthPin, nil];
-        Band * band = [Band bandWithPinboard:pinboard andPins:pins];
-        [band setupBand];
+        circularNumberOfPins = 10;
+        circularIncludeCentre = NO;
         
+        CCMenuItem * squarePinboardButton = [CCMenuItemImage itemWithNormalImage:@"squareLatticeButton.png" selectedImage:@"squareLatticeButton.png" target:self selector:@selector(squarePinboardTapped)];
         
-
+        CCMenuItem * trianglePinboardButton = [CCMenuItemImage itemWithNormalImage:@"triangularLatticeButton.png" selectedImage:@"triangularLatticeButton.png" target:self selector:@selector(trianglePinboardTapped)];
+        trianglePinboardButton.position = ccp(0, -110);
         
+        CCMenuItem * circularPinboardButton = [CCMenuItemImage itemWithNormalImage:@"circularButton.png" selectedImage:@"circularButton.png" target:self selector:@selector(circularPinboardTapped)];
+        circularPinboardButton.scaleX = 0.75;
+        circularPinboardButton.position = ccp(-30, -220);
         
+        CCMenuItem * centrePinToggle = [CCMenuItemImage itemWithNormalImage:@"centrePinButton.png" selectedImage:@"centrePinButton.png" target:self selector:@selector(centrePinToggleTapped)];
+        centrePinToggle.position = ccp(85, -190);
+        
+        CCMenuItem * addPinButton = [CCMenuItemImage itemWithNormalImage:@"addPinButton.png" selectedImage:@"addPinButton.png" target:self selector:@selector(addPinButtonTapped)];
+        addPinButton.position = ccp(85, -225);
+        
+        CCMenuItem * minusPinButton = [CCMenuItemImage itemWithNormalImage:@"minusPinButton.png" selectedImage:@"minusPinButton.png" target:self selector:@selector(minusPinButtonTapped)];
+        minusPinButton .position = ccp(85, -260);
+        
+        CCMenu * pinboardTypesMenu = [CCMenu menuWithItems:
+                                      squarePinboardButton,
+                                      trianglePinboardButton,
+                                      circularPinboardButton,
+                                      centrePinToggle,
+                                      addPinButton,
+                                      minusPinButton, nil];
+        pinboardTypesMenu.position = ccp(110, 500);
+        [self addChild:pinboardTypesMenu];
+        
+        CCMenuItem * addBand = [CCMenuItemImage itemWithNormalImage:@"newBandButton.png" selectedImage:@"newBandButton.png" target:self selector:@selector(addBandTapped)];
+        CCMenu * addBandMenu = [CCMenu menuWithItems:addBand, nil];
+        addBandMenu.position = ccp(110, 100);
+        [self addChild:addBandMenu];
         
         [[director touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
 	}
@@ -75,7 +99,6 @@
 }
 
 -(void)setupPinboard {
-    pinboard = [CircularPinboard pinboard];
     [pinboard setPosition:ccp(size.width/2, size.height/2)];
     [pinboard addToNode:self];
 }
@@ -96,6 +119,63 @@
 -(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint touchLocation = [self convertTouchToNodeSpace:touch];
     [pinboard processEnd:touchLocation];
+}
+
+-(void)squarePinboardTapped {
+    if (![pinboard isKindOfClass:[SquarePinboard class]]) {
+        [pinboard.background removeFromParentAndCleanup:YES];
+        pinboard = [SquarePinboard pinboard];
+        [self setupPinboard];
+    }
+}
+
+-(void)trianglePinboardTapped {
+    if (![pinboard isKindOfClass:[TrianglePinboard class]]) {
+        [pinboard.background removeFromParentAndCleanup:YES];
+        pinboard = [TrianglePinboard pinboard];
+        [self setupPinboard];
+    }
+}
+
+-(void)circularPinboardTapped {
+    if (![pinboard isKindOfClass:[CircularPinboard class]]) {
+        [pinboard.background removeFromParentAndCleanup:YES];
+        pinboard = [CircularPinboard pinboardWithCentre:circularIncludeCentre pins:circularNumberOfPins];
+        [self setupPinboard];
+    }
+}
+
+-(void)centrePinToggleTapped {
+    if ([pinboard isKindOfClass:[CircularPinboard class]]) {
+        [pinboard.background removeFromParentAndCleanup:YES];
+        circularIncludeCentre = !circularIncludeCentre;
+        pinboard = [CircularPinboard pinboardWithCentre:circularIncludeCentre pins:circularNumberOfPins];
+        [self setupPinboard];
+    }
+}
+
+-(void)addPinButtonTapped {
+    if ([pinboard isKindOfClass:[CircularPinboard class]]) {
+        [pinboard.background removeFromParentAndCleanup:YES];
+        circularNumberOfPins++;
+        pinboard = [CircularPinboard pinboardWithCentre:circularIncludeCentre pins:circularNumberOfPins];
+        [self setupPinboard];
+    }
+}
+
+-(void)minusPinButtonTapped {
+    if ([pinboard isKindOfClass:[CircularPinboard class]]) {
+        if (circularNumberOfPins > 3) {
+            [pinboard.background removeFromParentAndCleanup:YES];
+            circularNumberOfPins = circularNumberOfPins - 1;
+            pinboard = [CircularPinboard pinboardWithCentre:circularIncludeCentre pins:circularNumberOfPins];
+            [self setupPinboard];
+        }
+    }
+}
+
+-(void)addBandTapped {
+    [pinboard newBand];
 }
 
 #pragma mark GameKit delegate

@@ -58,6 +58,9 @@
     for (int i = 0; i < [self.bands count]; i++) {
         Band * band = [self.bands objectAtIndex:i];
         [band processTouch:touchLocation];
+        if (movingBand != nil) {
+            break;
+        }
     }
 }
 
@@ -88,6 +91,14 @@
 
 -(void)setMovingBand:(Band *)band {
     movingBand = band;
+}
+
+-(void)newBand {
+    Pin * firstPin = [self.pins objectAtIndex:0];
+    Pin * secondPin = [self.pins objectAtIndex:1];
+    NSMutableArray * newBandPins = [NSMutableArray arrayWithObjects:firstPin, secondPin, nil];
+    Band * band = [Band bandWithPinboard:self andPins:newBandPins];
+    [band setupBand];
 }
 
 @end

@@ -14,19 +14,35 @@
 
 @synthesize radius = radius_, numberOfPins = numberOfPins_, includeCentre = includeCentre_;
 
++(id)pinboard {
+    CircularPinboard * pinboard = [CircularPinboard new];
+    return pinboard;
+}
+
 -(id)init {
     if (self = [super init]) {
         self.radius = 100;
-        self.numberOfPins = 4;
-        self.includeCentre = YES;
+        self.numberOfPins = 8;
+        self.includeCentre = NO;
         [self setupPins];
     }
     return self;
 }
 
-+(id)pinboard {
-    CircularPinboard * pinboard = [CircularPinboard new];
++(id)pinboardWithCentre:(BOOL)includeCentre pins:(int)numberOfPins {
+    CircularPinboard * pinboard = [CircularPinboard alloc];
+    pinboard = [pinboard initWithCentre:includeCentre pins:numberOfPins];
     return pinboard;
+}
+
+-(id)initWithCentre:(BOOL)includeCentre pins:(int)numberOfPins {
+    if (self = [super init]) {
+        self.radius = 100;
+        self.includeCentre = includeCentre;
+        self.numberOfPins = numberOfPins;
+        [self setupPins];
+    }
+    return self;
 }
 
 -(void)setupPins {
