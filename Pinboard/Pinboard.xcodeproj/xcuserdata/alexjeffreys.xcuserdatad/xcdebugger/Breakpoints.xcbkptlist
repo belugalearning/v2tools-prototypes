@@ -8,26 +8,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Pinboard/Band.h"
-         timestampString = "390308442.391984"
+         timestampString = "390477219.524343"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "30"
-         endingLineNumber = "30"
+         startingLineNumber = "28"
+         endingLineNumber = "28"
          landmarkName = "-processTouch:"
          landmarkType = "4">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Pinboard/Band.m"
-         timestampString = "390414111.273556"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "212"
-         endingLineNumber = "212"
-         landmarkName = "-pinMove:"
-         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -73,24 +60,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Pinboard/Band.m"
-         timestampString = "390314556.935978"
+         timestampString = "390479979.621112"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "47"
-         endingLineNumber = "47"
-         landmarkName = "+bandWithPinboard:andPins:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Pinboard/Band.m"
-         timestampString = "390306344.904863"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "26"
-         endingLineNumber = "26"
+         startingLineNumber = "32"
+         endingLineNumber = "32"
          landmarkName = "-initWithPinboard:andPins:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -99,72 +73,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Pinboard/Band.m"
-         timestampString = "390306344.904863"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "31"
-         endingLineNumber = "31"
-         landmarkName = "-initWithPinboard:andPins:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Pinboard/Band.m"
-         timestampString = "390314556.935978"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "36"
-         endingLineNumber = "36"
-         landmarkName = "-initWithPinboard:andPins:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Pinboard/Band.m"
-         timestampString = "390314556.935978"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "40"
-         endingLineNumber = "40"
-         landmarkName = "-initWithPinboard:andPins:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Pinboard/Band.m"
-         timestampString = "390314556.935978"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "53"
-         endingLineNumber = "53"
-         landmarkName = "-setupBand"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Pinboard/Band.m"
-         timestampString = "390314556.935978"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "55"
-         endingLineNumber = "55"
-         landmarkName = "-setupBand"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Pinboard/Band.m"
-         timestampString = "390314556.935978"
+         timestampString = "390479979.621112"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "37"
@@ -177,12 +86,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Pinboard/Band.m"
-         timestampString = "390314556.935978"
+         timestampString = "390479979.621112"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "68"
-         endingLineNumber = "68"
-         landmarkName = "-setPositionAndRotationOfBandParts"
+         startingLineNumber = "42"
+         endingLineNumber = "42"
+         landmarkName = "-initWithPinboard:andPins:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -190,11 +99,50 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Pinboard/Band.m"
-         timestampString = "390408495.402998"
+         timestampString = "390479979.621112"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "134"
-         endingLineNumber = "134"
+         startingLineNumber = "44"
+         endingLineNumber = "44"
+         landmarkName = "+bandWithPinboard:andPins:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Pinboard/Band.m"
+         timestampString = "390481067.758288"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "51"
+         endingLineNumber = "51"
+         landmarkName = "@implementation Band"
+         landmarkType = "3">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Pinboard/Band.m"
+         timestampString = "390482123.461268"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "85"
+         endingLineNumber = "85"
+         landmarkName = "-pinsAdjacentToPin:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Pinboard/Band.m"
+         timestampString = "390482123.461268"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "156"
+         endingLineNumber = "156"
          landmarkName = "-splitBandPart:at:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -203,11 +151,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Pinboard/Band.m"
-         timestampString = "390408495.402998"
+         timestampString = "390482123.461268"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "137"
-         endingLineNumber = "137"
+         startingLineNumber = "158"
+         endingLineNumber = "158"
          landmarkName = "-splitBandPart:at:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -216,12 +164,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Pinboard/Band.m"
-         timestampString = "390410342.577278"
+         timestampString = "390482123.461268"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "161"
-         endingLineNumber = "161"
-         landmarkName = "-splitBandPart:at:"
+         startingLineNumber = "176"
+         endingLineNumber = "176"
+         landmarkName = "-unpinBandFromPin:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -229,25 +177,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Pinboard/Band.m"
-         timestampString = "390410342.577278"
+         timestampString = "390482123.461268"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "162"
-         endingLineNumber = "162"
-         landmarkName = "-splitBandPart:at:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Pinboard/Band.m"
-         timestampString = "390314556.935978"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "60"
-         endingLineNumber = "60"
-         landmarkName = "-setupBand"
+         startingLineNumber = "176"
+         endingLineNumber = "176"
+         landmarkName = "-unpinBandFromPin:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -268,25 +203,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Pinboard/Band.m"
-         timestampString = "390314556.935978"
+         timestampString = "390482123.461268"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "71"
-         endingLineNumber = "71"
-         landmarkName = "-setPositionAndRotationOfBandParts"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Pinboard/Band.m"
-         timestampString = "390414111.273556"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "221"
-         endingLineNumber = "221"
-         landmarkName = "-pinBandOnPin:"
+         startingLineNumber = "88"
+         endingLineNumber = "88"
+         landmarkName = "-pinsAdjacentToBandPart:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -333,12 +255,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Pinboard/Band.m"
-         timestampString = "390414111.273556"
+         timestampString = "390482801.76409"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "226"
-         endingLineNumber = "226"
-         landmarkName = "-removeMovingPin"
+         startingLineNumber = "211"
+         endingLineNumber = "211"
+         landmarkName = "-pinBandOnPin:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -352,47 +274,6 @@
          startingLineNumber = "84"
          endingLineNumber = "84"
          landmarkName = "-processEnd:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Pinboard/Band.m"
-         timestampString = "390416074.445055"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "248"
-         endingLineNumber = "248"
-         landmarkName = "-removeMovingPin"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         condition = "movingPin != nil"
-         continueAfterRunningActions = "No"
-         filePath = "Pinboard/Band.m"
-         timestampString = "390324315.012277"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "77"
-         endingLineNumber = "77"
-         landmarkName = "-addBandPartFrom:to:withIndex:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         condition = "movingPin != nil"
-         continueAfterRunningActions = "No"
-         filePath = "Pinboard/Band.m"
-         timestampString = "390324538.197972"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "76"
-         endingLineNumber = "76"
-         landmarkName = "-addBandPartFrom:to:withIndex:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -452,11 +333,24 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Pinboard/Band.m"
-         timestampString = "390414111.273556"
+         timestampString = "390482123.461268"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "186"
-         endingLineNumber = "186"
+         startingLineNumber = "181"
+         endingLineNumber = "181"
+         landmarkName = "-unpinBandFromPin:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Pinboard/Band.m"
+         timestampString = "390482801.76409"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "194"
+         endingLineNumber = "194"
          landmarkName = "-setEntryAndExitPartsForPin:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -465,11 +359,141 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Pinboard/Band.m"
-         timestampString = "390414111.273556"
+         timestampString = "390482123.461268"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "217"
-         endingLineNumber = "217"
+         startingLineNumber = "165"
+         endingLineNumber = "165"
+         landmarkName = "-unpinBandFromPin:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Pinboard/Band.m"
+         timestampString = "390482123.461268"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "92"
+         endingLineNumber = "92"
+         landmarkName = "-pinIndexInCorrectRange:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Pinboard/Band.m"
+         timestampString = "390482123.461268"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "96"
+         endingLineNumber = "96"
+         landmarkName = "-pinIndexInCorrectRange:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Pinboard/Band.m"
+         timestampString = "390483067.718347"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "243"
+         endingLineNumber = "243"
+         landmarkName = "-cleanPins"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Pinboard/Band.m"
+         timestampString = "390482982.638557"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "253"
+         endingLineNumber = "253"
+         landmarkName = "-cleanPins"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Pinboard/Band.m"
+         timestampString = "390483067.718347"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "248"
+         endingLineNumber = "248"
+         landmarkName = "-cleanPins"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Pinboard/Band.m"
+         timestampString = "390483067.718347"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "245"
+         endingLineNumber = "245"
+         landmarkName = "-cleanPins"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Pinboard/Band.m"
+         timestampString = "390482123.461268"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "164"
+         endingLineNumber = "164"
+         landmarkName = "@implementation Band"
+         landmarkType = "3">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Pinboard/Band.m"
+         timestampString = "390482123.461268"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "169"
+         endingLineNumber = "169"
+         landmarkName = "-unpinBandFromPin:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Pinboard/Band.m"
+         timestampString = "390482123.461268"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "168"
+         endingLineNumber = "168"
+         landmarkName = "-unpinBandFromPin:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Pinboard/Band.m"
+         timestampString = "390482801.76409"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "215"
+         endingLineNumber = "215"
          landmarkName = "-pinBandOnPin:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -478,12 +502,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Pinboard/Band.m"
-         timestampString = "390414111.273556"
+         timestampString = "390483067.718347"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "213"
-         endingLineNumber = "213"
-         landmarkName = "-pinMove:"
+         startingLineNumber = "247"
+         endingLineNumber = "247"
+         landmarkName = "-cleanPins"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -491,12 +515,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Pinboard/Band.m"
-         timestampString = "390414111.273556"
+         timestampString = "390483067.718347"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "211"
-         endingLineNumber = "211"
-         landmarkName = "-pinMove:"
+         startingLineNumber = "255"
+         endingLineNumber = "255"
+         landmarkName = "-cleanPins"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -504,12 +528,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Pinboard/Band.m"
-         timestampString = "390414111.273556"
+         timestampString = "390481067.758288"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "199"
-         endingLineNumber = "199"
-         landmarkName = "-processMove:"
+         startingLineNumber = "52"
+         endingLineNumber = "52"
+         landmarkName = "-setupBand"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -517,24 +541,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Pinboard/Band.m"
-         timestampString = "390408495.402998"
+         timestampString = "390482123.461268"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "143"
-         endingLineNumber = "143"
-         landmarkName = "-splitBandPart:at:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Pinboard/Band.m"
-         timestampString = "390399569.227872"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "106"
-         endingLineNumber = "106"
+         startingLineNumber = "117"
+         endingLineNumber = "117"
          landmarkName = "-processTouch:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -543,12 +554,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Pinboard/Band.m"
-         timestampString = "390399597.94513"
+         timestampString = "390482123.461268"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "110"
-         endingLineNumber = "110"
-         landmarkName = "-processTouch:"
+         startingLineNumber = "57"
+         endingLineNumber = "57"
+         landmarkName = "-setupBand"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -556,181 +567,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Pinboard/Band.m"
-         timestampString = "390416074.445055"
+         timestampString = "390481914.470586"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "239"
-         endingLineNumber = "239"
-         landmarkName = "-removeMovingPin"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Pinboard/Band.m"
-         timestampString = "390410342.577278"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "166"
-         endingLineNumber = "166"
-         landmarkName = "-unpinBandFromPin:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Pinboard/Band.m"
-         timestampString = "390416074.445055"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "254"
-         endingLineNumber = "254"
-         landmarkName = "-cleanPins"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Pinboard/Band.m"
-         timestampString = "390416074.445055"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "268"
-         endingLineNumber = "268"
-         landmarkName = "-cleanPins"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Pinboard/Band.m"
-         timestampString = "390416074.445055"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "266"
-         endingLineNumber = "266"
-         landmarkName = "-cleanPins"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Pinboard/Band.m"
-         timestampString = "390416074.445055"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "276"
-         endingLineNumber = "276"
-         landmarkName = "-cleanPins"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Pinboard/Band.m"
-         timestampString = "390416074.445055"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "272"
-         endingLineNumber = "272"
-         landmarkName = "-cleanPins"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Pinboard/Band.m"
-         timestampString = "390416074.445055"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "269"
-         endingLineNumber = "269"
-         landmarkName = "-cleanPins"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Pinboard/Band.m"
-         timestampString = "390408495.402998"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "142"
-         endingLineNumber = "142"
-         landmarkName = "-splitBandPart:at:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Pinboard/Band.m"
-         timestampString = "390410251.92381"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "148"
-         endingLineNumber = "148"
-         landmarkName = "-splitBandPart:at:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Pinboard/Band.m"
-         timestampString = "390410251.92381"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "146"
-         endingLineNumber = "146"
-         landmarkName = "-splitBandPart:at:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Pinboard/Band.m"
-         timestampString = "390410342.577278"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "159"
-         endingLineNumber = "159"
-         landmarkName = "-splitBandPart:at:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Pinboard/Band.m"
-         timestampString = "390414951.232952"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "182"
-         endingLineNumber = "182"
-         landmarkName = "-unpinBandFromPin:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Pinboard/Band.m"
-         timestampString = "390416155.540953"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "230"
-         endingLineNumber = "230"
-         landmarkName = "-removeMovingPin"
+         startingLineNumber = "54"
+         endingLineNumber = "54"
+         landmarkName = "-setupBand"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

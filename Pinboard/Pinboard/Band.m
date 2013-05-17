@@ -47,8 +47,6 @@
     return band;
 }
 
-
-
 -(void)setupBand {
     int numberOfPins = [self.pins count];
     if (numberOfPins > 1) {
@@ -179,7 +177,6 @@
     exitPart = [self.bandParts objectAtIndex:index];
     [entryPart setToBeFromPin:entryPart.fromPin toPin:movingPin];
     [exitPart setToBeFromPin:movingPin toPin:exitPart.toPin];
-    [self setPositionAndRotationOfBandParts];
 }
 
 -(void)setEntryAndExitPartsForPin:(Pin *)pin {
@@ -205,12 +202,8 @@
     movingPin = nil;
     entryPart = nil;
     exitPart = nil;
-}
-
--(void)pinMove:(CGPoint)touch {
-    CGPoint pinPosition = [self.bandNode convertToNodeSpace:touch];
-    movingPin.sprite.position = pinPosition;
     [self setPositionAndRotationOfBandParts];
+    [self cleanPins];
 }
 
 -(void)pinBandOnPin:(Pin *)pin {
@@ -219,7 +212,6 @@
     int movingPinIndex = [self.pins indexOfObject:movingPin];
     [self.pins replaceObjectAtIndex:movingPinIndex withObject:pin];
     [self setPositionAndRotationOfBandParts];
-    //[self cleanPins];
 }
 
 -(void)removeMovingPin {
@@ -235,20 +227,7 @@
     [entryPart.sprite removeFromParentAndCleanup:YES];
     [exitPart.sprite removeFromParentAndCleanup:YES];
     [movingPin.sprite removeFromParentAndCleanup:YES];
-    
-    //if (fromPin == toPin) {
-    //            [self.pins removeObject:fromPin];
-    //} else {
-    //    int index = [self.pins indexOfObject:fromPin];
-    //    [self addBandPartFrom:fromPin to:toPin withIndex:index];
-
-    //}
-    
-    [self setPositionAndRotationOfBandParts];
-    //[self cleanPins];
 }
-
-
 
 -(void)cleanPins {
     int numberOfPins = [self.pins count];
@@ -265,20 +244,19 @@
     }
     [self.pins removeObjectsAtIndexes:repeatPinsIndexes];
     [self.bandParts removeObjectsAtIndexes:repeatPinsIndexes];
-    
-    numberOfPins = [self.pins count];
     /*
+    numberOfPins = [self.pins count];
     NSMutableIndexSet * straightThroughPinsIndexes = [NSMutableIndexSet indexSet];
     for (int i = 0; i < numberOfPins; i++) {
         BandPart * thisPart = [self.bandParts objectAtIndex:i];
-        BandPart * nextPart = [self.bandParts objectAtIndex:i + 1];
+        BandPart * nextPart = [self.bandParts objectAtIndex:(i + 1)%numberOfPins];
         if (thisPart.sprite.parent.rotation == nextPart.sprite.parent.rotation) {
             [straightThroughPinsIndexes addIndex:(i+1)%numberOfPins];
         }
     }
     [self.pins removeObjectsAtIndexes:repeatPinsIndexes];
-    */
     [self setPositionAndRotationOfBandParts];
+     */
 }
 
 
