@@ -11,6 +11,7 @@
 #import "Pin.h"
 #import "BandPart.h"
 #import "CCSprite_SpriteTouchExtensions.h"
+#import "Angle.h"
 
 
 @implementation Band {
@@ -58,6 +59,13 @@
         [self addBandPartFrom:lastPin to:firstPin withIndex:numberOfPins - 1];
     }
     [self setPositionAndRotationOfBandParts];
+    
+    
+    for (Pin * pin in self.pins) {
+        Angle * angle = [Angle new];
+        angle.position = pin.sprite.position;
+        [self.bandNode addChild:angle];
+    }
 }
 
 -(void)setPositionAndRotationOfBandParts {

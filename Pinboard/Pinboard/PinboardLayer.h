@@ -16,6 +16,7 @@
 @class Band;
 @class Pin;
 @class BandPart;
+@class BandSelectButton;
 @interface PinboardLayer : CCLayer
 {
     Pinboard * pinboard;
@@ -25,8 +26,6 @@
     Band * movingBand;
     NSArray * adjacentPins;
     Pin * movingPin;
-    CCMenuItemToggle * centrePinOnButton;
-    CCMenuItemToggle * centrePinOffButton;
 }
 
 // returns a CCScene that contains the PinboardLayer as the only child

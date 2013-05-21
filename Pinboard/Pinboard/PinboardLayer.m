@@ -27,6 +27,7 @@
 @implementation PinboardLayer {
     int circularNumberOfPins;
     BOOL circularIncludeCentre;
+    CCMenu * bandSelectMenu;
 }
 
 // Helper class method that creates a Scene with the HelloWorldLayer as the only child.
@@ -93,6 +94,20 @@
         addBandMenu.position = ccp(110, 100);
         [self addChild:addBandMenu];
         
+        bandSelectMenu = [CCMenu new];
+        bandSelectMenu.position = ccp(800, 700);
+        [self addChild:bandSelectMenu];
+        
+        
+        Pin * firstPin = [pinboard.pins objectAtIndex:1];
+        Pin * secondPin = [pinboard.pins objectAtIndex:5];
+        Pin * thirdPin = [pinboard.pins objectAtIndex:50];
+        Pin * fourthPin = [pinboard.pins objectAtIndex:40];
+        NSMutableArray * array = [NSMutableArray arrayWithObjects:firstPin, secondPin, thirdPin, fourthPin, nil];
+        Band * band = [Band bandWithPinboard:pinboard andPins:array];
+        [band setupBand];
+        
+
         [[director touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
 	}
 	return self;
@@ -123,7 +138,7 @@
 
 -(void)squarePinboardTapped {
     if (![pinboard isKindOfClass:[SquarePinboard class]]) {
-        [pinboard.background removeFromParentAndCleanup:YES];
+        [self clearPinboardSprites];
         pinboard = [SquarePinboard pinboard];
         [self setupPinboard];
     }
@@ -131,7 +146,7 @@
 
 -(void)trianglePinboardTapped {
     if (![pinboard isKindOfClass:[TrianglePinboard class]]) {
-        [pinboard.background removeFromParentAndCleanup:YES];
+        [self clearPinboardSprites];
         pinboard = [TrianglePinboard pinboard];
         [self setupPinboard];
     }
@@ -139,7 +154,7 @@
 
 -(void)circularPinboardTapped {
     if (![pinboard isKindOfClass:[CircularPinboard class]]) {
-        [pinboard.background removeFromParentAndCleanup:YES];
+        [self clearPinboardSprites];
         pinboard = [CircularPinboard pinboardWithCentre:circularIncludeCentre pins:circularNumberOfPins];
         [self setupPinboard];
     }
@@ -147,7 +162,7 @@
 
 -(void)centrePinToggleTapped {
     if ([pinboard isKindOfClass:[CircularPinboard class]]) {
-        [pinboard.background removeFromParentAndCleanup:YES];
+        [self clearPinboardSprites];
         circularIncludeCentre = !circularIncludeCentre;
         pinboard = [CircularPinboard pinboardWithCentre:circularIncludeCentre pins:circularNumberOfPins];
         [self setupPinboard];
@@ -156,7 +171,7 @@
 
 -(void)addPinButtonTapped {
     if ([pinboard isKindOfClass:[CircularPinboard class]]) {
-        [pinboard.background removeFromParentAndCleanup:YES];
+        [self clearPinboardSprites];
         circularNumberOfPins++;
         pinboard = [CircularPinboard pinboardWithCentre:circularIncludeCentre pins:circularNumberOfPins];
         [self setupPinboard];
@@ -166,7 +181,7 @@
 -(void)minusPinButtonTapped {
     if ([pinboard isKindOfClass:[CircularPinboard class]]) {
         if (circularNumberOfPins > 3) {
-            [pinboard.background removeFromParentAndCleanup:YES];
+        [self clearPinboardSprites];
             circularNumberOfPins = circularNumberOfPins - 1;
             pinboard = [CircularPinboard pinboardWithCentre:circularIncludeCentre pins:circularNumberOfPins];
             [self setupPinboard];
@@ -174,8 +189,26 @@
     }
 }
 
+-(void)clearPinboardSprites {
+    [pinboard.background removeFromParentAndCleanup:YES];
+    [bandSelectMenu removeAllChildrenWithCleanup:YES];
+}
+
 -(void)addBandTapped {
-    [pinboard newBand];
+    Band * newBand = [pinboard newBand];
+    CCMenuItemImage * bandSelectButtonImage = [CCMenuItemImage itemWithNormalImage:@"bandButton.png" selectedImage:@"bandButton.png" target:pinboard selector:@selector(selectBandFromButton:)];
+    bandSelectButtonImage.userObject = newBand;
+    bandSelectButtonImage.color = newBand.colour;
+    [self addBandSelectButton:bandSelectButtonImage];
+}
+
+-(void)addBandSelectButton:(CCMenuItem *)newButton {
+    int numberOfButtons = [bandSelectMenu.children count];
+    int numberOfRows = 6;
+    int xPosition = 0 + 30 * (numberOfButtons%numberOfRows);
+    int yPosition = 0 - 30 * (numberOfButtons/numberOfRows);
+    newButton.position = ccp(xPosition, yPosition);
+    [bandSelectMenu addChild:newButton];
 }
 
 #pragma mark GameKit delegate

@@ -10,6 +10,7 @@
 #import "Pin.h"
 #import "Band.h"
 #import "CCSprite_SpriteTouchExtensions.h"
+#import "Angle.h"
 
 @implementation Pinboard {
     Band * movingBand;
@@ -22,6 +23,20 @@
         self.background = [CCSprite spriteWithFile:@"background.png"];
         self.pins = [NSMutableArray array];
         self.bands = [NSMutableArray array];
+        
+        /*
+        Angle * angle = [Angle new];
+        [self.background addChild:angle];
+        */
+
+
+        
+        /*
+        CGPoint firstPoint = ccp(0, 0);
+        float radius = 100;
+        ccDrawCircle(firstPoint, radius, M_PI, 10, NO);
+         */
+        
     }
     return self;
 }
@@ -91,14 +106,36 @@
 
 -(void)setMovingBand:(Band *)band {
     movingBand = band;
+    [self selectBand:band];
 }
 
--(void)newBand {
+-(Band *)newBand {
     Pin * firstPin = [self.pins objectAtIndex:0];
     Pin * secondPin = [self.pins objectAtIndex:1];
     NSMutableArray * newBandPins = [NSMutableArray arrayWithObjects:firstPin, secondPin, nil];
     Band * band = [Band bandWithPinboard:self andPins:newBandPins];
     [band setupBand];
+    [self selectBand:band];
+    return band;
+}
+
+-(void)selectBandFromButton:(CCMenuItem *)sender {
+    Band * band = sender.userObject;
+    [self selectBand:band];
+}
+
+-(void)selectBand:(Band *)band {
+    [self.bands removeObject:band];
+    [self.bands insertObject:band atIndex:0];
+    [self setBandsZIndexToPriorityOrder];
+}
+
+-(void)setBandsZIndexToPriorityOrder {
+    int numberOfBands = [self.bands count];
+    for (int i = 1; i <= numberOfBands; i++) {
+        Band * band = [self.bands objectAtIndex:numberOfBands - i];
+        [self.background reorderChild:band.bandNode z:i];
+    }
 }
 
 @end

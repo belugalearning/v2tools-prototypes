@@ -147,9 +147,12 @@
 		F387B827173CF858007EC6AA /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = F387B826173CF858007EC6AA /* pin.png */; };
 		F387B82A173D5002007EC6AA /* Band.m in Sources */ = {isa = PBXBuildFile; fileRef = F387B829173D5002007EC6AA /* Band.m */; };
 		F387B82C173D585C007EC6AA /* bandPart.png in Resources */ = {isa = PBXBuildFile; fileRef = F387B82B173D585C007EC6AA /* bandPart.png */; };
+		F387D020174A708C00E20950 /* angleBase.png in Resources */ = {isa = PBXBuildFile; fileRef = F387D01F174A708C00E20950 /* angleBase.png */; };
+		F387D027174A770800E20950 /* Angle.m in Sources */ = {isa = PBXBuildFile; fileRef = F387D026174A770800E20950 /* Angle.m */; };
 		F3924502174671760061C477 /* centrePinButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F39244FF174671760061C477 /* centrePinButton.png */; };
 		F3924503174671760061C477 /* addPinButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F3924500174671760061C477 /* addPinButton.png */; };
 		F3924504174671760061C477 /* minusPinButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F3924501174671760061C477 /* minusPinButton.png */; };
+		F392450617468C690061C477 /* bandButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F392450517468C690061C477 /* bandButton.png */; };
 		F3C9DDDB17424CDC0016FDEA /* CCSprite_SpriteTouchExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F3C9DDDA17424CDC0016FDEA /* CCSprite_SpriteTouchExtensions.m */; };
 		F3C9DDDE174257910016FDEA /* BandPart.m in Sources */ = {isa = PBXBuildFile; fileRef = F3C9DDDD174257910016FDEA /* BandPart.m */; };
 /* End PBXBuildFile section */
@@ -438,9 +441,13 @@
 		F387B828173D5002007EC6AA /* Band.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Band.h; sourceTree = "<group>"; };
 		F387B829173D5002007EC6AA /* Band.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Band.m; sourceTree = "<group>"; };
 		F387B82B173D585C007EC6AA /* bandPart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bandPart.png; sourceTree = "<group>"; };
+		F387D01F174A708C00E20950 /* angleBase.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = angleBase.png; sourceTree = "<group>"; };
+		F387D025174A770800E20950 /* Angle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Angle.h; sourceTree = "<group>"; };
+		F387D026174A770800E20950 /* Angle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Angle.m; sourceTree = "<group>"; };
 		F39244FF174671760061C477 /* centrePinButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = centrePinButton.png; sourceTree = "<group>"; };
 		F3924500174671760061C477 /* addPinButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addPinButton.png; sourceTree = "<group>"; };
 		F3924501174671760061C477 /* minusPinButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = minusPinButton.png; sourceTree = "<group>"; };
+		F392450517468C690061C477 /* bandButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bandButton.png; sourceTree = "<group>"; };
 		F3C9DDD717424BA40016FDEA /* CCSprite_SpriteTouchExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSprite_SpriteTouchExtensions.h; sourceTree = "<group>"; };
 		F3C9DDDA17424CDC0016FDEA /* CCSprite_SpriteTouchExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCSprite_SpriteTouchExtensions.m; path = ../CCSprite_SpriteTouchExtensions.m; sourceTree = "<group>"; };
 		F3C9DDDC174257910016FDEA /* BandPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BandPart.h; sourceTree = "<group>"; };
@@ -520,6 +527,8 @@
 				F387746E173BDB190087F831 /* Pinboard.m */,
 				F387745D173BD1060087F831 /* PinboardLayer.h */,
 				F387745E173BD1060087F831 /* PinboardLayer.m */,
+				F387D025174A770800E20950 /* Angle.h */,
+				F387D026174A770800E20950 /* Angle.m */,
 				F3C9DDDA17424CDC0016FDEA /* CCSprite_SpriteTouchExtensions.m */,
 				F3C9DDD717424BA40016FDEA /* CCSprite_SpriteTouchExtensions.h */,
 				F3877470173BE6970087F831 /* RegularPinboard.h */,
@@ -543,8 +552,10 @@
 				F39244FF174671760061C477 /* centrePinButton.png */,
 				F3924500174671760061C477 /* addPinButton.png */,
 				F3924501174671760061C477 /* minusPinButton.png */,
+				F392450517468C690061C477 /* bandButton.png */,
 				F3875C83174651BD00A176B2 /* circularButton.png */,
 				F38772E6173BD1050087F831 /* Default-Landscape~ipad.png */,
+				F387D01F174A708C00E20950 /* angleBase.png */,
 				F3875C8A1746697200A176B2 /* newBandButton.png */,
 				F38772E8173BD1050087F831 /* fps_images.png */,
 				F38772EA173BD1050087F831 /* fps_images-hd.png */,
@@ -980,6 +991,8 @@
 				F3924502174671760061C477 /* centrePinButton.png in Resources */,
 				F3924503174671760061C477 /* addPinButton.png in Resources */,
 				F3924504174671760061C477 /* minusPinButton.png in Resources */,
+				F392450617468C690061C477 /* bandButton.png in Resources */,
+				F387D020174A708C00E20950 /* angleBase.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1103,6 +1116,7 @@
 				F387B82A173D5002007EC6AA /* Band.m in Sources */,
 				F3C9DDDB17424CDC0016FDEA /* CCSprite_SpriteTouchExtensions.m in Sources */,
 				F3C9DDDE174257910016FDEA /* BandPart.m in Sources */,
+				F387D027174A770800E20950 /* Angle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
