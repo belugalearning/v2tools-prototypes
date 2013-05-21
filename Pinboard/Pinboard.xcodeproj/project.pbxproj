@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F3874CA5174BAF3D00DD71E8 /* showAnglesButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F3874CA4174BAF3D00DD71E8 /* showAnglesButton.png */; };
 		F3875C84174651BD00A176B2 /* squareLatticeButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F3875C81174651BD00A176B2 /* squareLatticeButton.png */; };
 		F3875C85174651BD00A176B2 /* triangularLatticeButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F3875C82174651BD00A176B2 /* triangularLatticeButton.png */; };
 		F3875C86174651BD00A176B2 /* circularButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F3875C83174651BD00A176B2 /* circularButton.png */; };
@@ -147,7 +148,6 @@
 		F387B827173CF858007EC6AA /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = F387B826173CF858007EC6AA /* pin.png */; };
 		F387B82A173D5002007EC6AA /* Band.m in Sources */ = {isa = PBXBuildFile; fileRef = F387B829173D5002007EC6AA /* Band.m */; };
 		F387B82C173D585C007EC6AA /* bandPart.png in Resources */ = {isa = PBXBuildFile; fileRef = F387B82B173D585C007EC6AA /* bandPart.png */; };
-		F387D020174A708C00E20950 /* angleBase.png in Resources */ = {isa = PBXBuildFile; fileRef = F387D01F174A708C00E20950 /* angleBase.png */; };
 		F387D027174A770800E20950 /* Angle.m in Sources */ = {isa = PBXBuildFile; fileRef = F387D026174A770800E20950 /* Angle.m */; };
 		F3924502174671760061C477 /* centrePinButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F39244FF174671760061C477 /* centrePinButton.png */; };
 		F3924503174671760061C477 /* addPinButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F3924500174671760061C477 /* addPinButton.png */; };
@@ -158,6 +158,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F3874CA4174BAF3D00DD71E8 /* showAnglesButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = showAnglesButton.png; path = ../../../PinboardResources/showAnglesButton.png; sourceTree = "<group>"; };
 		F3875C81174651BD00A176B2 /* squareLatticeButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = squareLatticeButton.png; sourceTree = "<group>"; };
 		F3875C82174651BD00A176B2 /* triangularLatticeButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = triangularLatticeButton.png; sourceTree = "<group>"; };
 		F3875C83174651BD00A176B2 /* circularButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circularButton.png; sourceTree = "<group>"; };
@@ -441,7 +442,6 @@
 		F387B828173D5002007EC6AA /* Band.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Band.h; sourceTree = "<group>"; };
 		F387B829173D5002007EC6AA /* Band.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Band.m; sourceTree = "<group>"; };
 		F387B82B173D585C007EC6AA /* bandPart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bandPart.png; sourceTree = "<group>"; };
-		F387D01F174A708C00E20950 /* angleBase.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = angleBase.png; sourceTree = "<group>"; };
 		F387D025174A770800E20950 /* Angle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Angle.h; sourceTree = "<group>"; };
 		F387D026174A770800E20950 /* Angle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Angle.m; sourceTree = "<group>"; };
 		F39244FF174671760061C477 /* centrePinButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = centrePinButton.png; sourceTree = "<group>"; };
@@ -549,13 +549,13 @@
 				F38772E4173BD1050087F831 /* Default.png */,
 				F3875C81174651BD00A176B2 /* squareLatticeButton.png */,
 				F3875C82174651BD00A176B2 /* triangularLatticeButton.png */,
+				F3874CA4174BAF3D00DD71E8 /* showAnglesButton.png */,
 				F39244FF174671760061C477 /* centrePinButton.png */,
 				F3924500174671760061C477 /* addPinButton.png */,
 				F3924501174671760061C477 /* minusPinButton.png */,
 				F392450517468C690061C477 /* bandButton.png */,
 				F3875C83174651BD00A176B2 /* circularButton.png */,
 				F38772E6173BD1050087F831 /* Default-Landscape~ipad.png */,
-				F387D01F174A708C00E20950 /* angleBase.png */,
 				F3875C8A1746697200A176B2 /* newBandButton.png */,
 				F38772E8173BD1050087F831 /* fps_images.png */,
 				F38772EA173BD1050087F831 /* fps_images-hd.png */,
@@ -992,7 +992,7 @@
 				F3924503174671760061C477 /* addPinButton.png in Resources */,
 				F3924504174671760061C477 /* minusPinButton.png in Resources */,
 				F392450617468C690061C477 /* bandButton.png in Resources */,
-				F387D020174A708C00E20950 /* angleBase.png in Resources */,
+				F3874CA5174BAF3D00DD71E8 /* showAnglesButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

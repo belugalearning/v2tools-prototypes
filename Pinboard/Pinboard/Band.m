@@ -18,9 +18,11 @@
     Pin * movingPin;
     BandPart * entryPart;
     BandPart * exitPart;
+    BOOL showAngles;
+    CCNode * angleNode;
 }
 
-@synthesize pins = pins_, bandParts = bandParts_, colour = colour_, bandNode = bandNode_;
+@synthesize pins = pins_, bandParts = bandParts_, colour = colour_, bandNode = bandNode_, angles = angles_, anticlockwise = anticlockwise_, propertiesNode = propertiesNode_;
 
 -(id)initWithPinboard:(Pinboard *)pinboard andPins:(NSMutableArray *)pins {
     if (self = [super init]) {
@@ -35,6 +37,18 @@
         int green = arc4random_uniform(255);
         int blue = arc4random_uniform(255);
         self.colour = ccc3(red, green, blue);
+        
+        
+        self.propertiesNode = [CCNode node];
+        self.propertiesNode.zOrder = 1;
+        [self.bandNode addChild:self.propertiesNode];
+        
+        angleNode = [CCNode node];
+        [self.propertiesNode addChild:angleNode];
+        self.angles = [NSMutableArray array];
+        showAngles = NO;
+        angleNode.visible = NO;
+        [self recalculateAngles];
     }
     return self;
     
@@ -60,12 +74,18 @@
     }
     [self setPositionAndRotationOfBandParts];
     
-    
-    for (Pin * pin in self.pins) {
+    /*
+    int numberOfBandParts = [self.bandParts count];
+    for (int i = 0; i < numberOfBandParts; i++) {
+        BandPart * bandPart = [self.bandParts objectAtIndex:i];
+        BandPart * nextBandPart = [self.bandParts objectAtIndex:(i+1)%numberOfBandParts];
         Angle * angle = [Angle new];
-        angle.position = pin.sprite.position;
-        [self.bandNode addChild:angle];
+        angle.position = bandPart.toPin.sprite.position;
     }
+     */
+    
+    [self setAngles];
+     
 }
 
 -(void)setPositionAndRotationOfBandParts {
@@ -81,29 +101,17 @@
     [self.bandNode addChild:bandpart.baseNode];
 }
 
--(NSArray *)pinsAdjacentToPin:(int)pinIndex {
-    Pin * previousPin = [self.pins objectAtIndex:[self pinIndexInCorrectRange:pinIndex-1]];
-    Pin * nextPin = [self.pins objectAtIndex:[self pinIndexInCorrectRange:pinIndex+1]];
-    NSArray * adjacentPins = [NSArray arrayWithObjects: previousPin, nextPin, nil];
-    return adjacentPins;
-}
-
--(NSArray *)pinsAdjacentToBandPart:(int)bandPartIndex {
-    BandPart * bandPart = [self.bandParts objectAtIndex:bandPartIndex];
-    return [bandPart adjacentPins];
-}
-
--(int)pinIndexInCorrectRange:(int)pinIndex {
-    int numberOfPins = [self.pins count];
-    int correctPinIndex;
-    if (pinIndex < 0) {
-        correctPinIndex =  pinIndex + numberOfPins;
-    } else if (pinIndex >= numberOfPins) {
-        correctPinIndex = pinIndex - numberOfPins;
+-(int)indexInCorrectRange:(int)index forArray:(NSArray *)array {
+    int arraySize = [array count];
+    int correctIndex;
+    if (index < 0) {
+        correctIndex =  index + arraySize;
+    } else if (index >= arraySize) {
+        correctIndex = index - arraySize;
     } else {
-        correctPinIndex = pinIndex;
+        correctIndex = index;
     }
-    return correctPinIndex;
+    return correctIndex;
 }
 
 -(void)processTouch:(CGPoint)touchLocation {
@@ -133,7 +141,7 @@
         }
     }
     [self setPositionAndRotationOfBandParts];
-    
+    [self setAngles];
 }
 
 -(void)splitBandPart:(int)index at:(CGPoint)touchLocation {
@@ -151,7 +159,7 @@
     [self.pins insertObject:movingPin atIndex:movingPinIndex];
         [self.bandParts removeObjectAtIndex:index];
     if (movingPinIndex == 0) {
-                [self addBandPartFrom:previousPin to:movingPin withIndex:index];
+        [self addBandPartFrom:previousPin to:movingPin withIndex:index];
         entryPart = [self.bandParts objectAtIndex:index];
         [self addBandPartFrom:movingPin to:nextPin withIndex:0];
         exitPart = [self.bandParts objectAtIndex:0];
@@ -167,7 +175,7 @@
    
     
     [bandPart.sprite.parent removeFromParentAndCleanup:YES];
-
+    [self recalculateAngles];
 }
 
 -(void)unpinBandFromPin:(int)index {
@@ -205,6 +213,7 @@
     
     movingPin.sprite.position = touchLocation;
     [self setPositionAndRotationOfBandParts];
+    [self setAngles];
 }
 
 -(void)processEnd:(CGPoint)touchLocation {
@@ -214,6 +223,7 @@
     exitPart = nil;
     [self setPositionAndRotationOfBandParts];
     [self cleanPins];
+    [self setAngles];
 }
 
 -(void)pinBandOnPin:(Pin *)pin {
@@ -222,6 +232,7 @@
     int movingPinIndex = [self.pins indexOfObject:movingPin];
     [self.pins replaceObjectAtIndex:movingPinIndex withObject:pin];
     [self setPositionAndRotationOfBandParts];
+
 }
 
 -(void)removeMovingPin {
@@ -237,6 +248,8 @@
     [entryPart.sprite removeFromParentAndCleanup:YES];
     [exitPart.sprite removeFromParentAndCleanup:YES];
     [movingPin.sprite removeFromParentAndCleanup:YES];
+    
+    [self recalculateAngles];
 }
 
 -(void)cleanPins {
@@ -269,6 +282,76 @@
     [self.pins removeObjectsAtIndexes:repeatPinsIndexes];
     [self setPositionAndRotationOfBandParts];
      */
+}
+
+-(void)showAngles {
+    showAngles = !showAngles;
+    angleNode.visible = showAngles;
+}
+
+-(void)recalculateAngles {
+    int numberOfPins = [self.pins count];
+    [self.angles removeAllObjects];
+    [angleNode removeAllChildrenWithCleanup:YES];
+    for (int i = 0; i < numberOfPins; i++) {
+        Angle * angle = [Angle new];
+        [self.angles addObject:angle];
+        Pin * pin = [self.pins objectAtIndex:i];
+        angle.position = pin.sprite.position;
+        [angle setColourRed:self.colour.r green:self.colour.g blue:self.colour.b];
+        [angleNode addChild:angle];
+        angle.label = [CCLabelTTF labelWithString:@"" fontName:@"Arial" fontSize:12];
+        angle.label.position = ccp(0, 10);
+        [angle addChild:angle.label];
+    }
+}
+
+-(void)setAngles {
+    int numberOfPins = [self.pins count];
+    float totalAngle = 0;
+    for (int i = 0; i < numberOfPins; i++) {
+        Angle * angle = [self.angles objectAtIndex:i];
+        BandPart * inPart = [self.bandParts objectAtIndex:[self indexInCorrectRange:i-1 forArray:self.bandParts]];
+        BandPart * outPart = [self.bandParts objectAtIndex:i];
+        float inPartAngle = CC_DEGREES_TO_RADIANS(180 + inPart.baseNode.rotation);
+        float outPartAngle = CC_DEGREES_TO_RADIANS(outPart.baseNode.rotation);
+        angle.startAngle = inPartAngle;
+        float thisAngle = [self angleInCorrectRange:outPartAngle - inPartAngle];
+        angle.anticlockwise = self.anticlockwise;
+        if (self.anticlockwise) {
+            angle.throughAngle = thisAngle;
+        } else {
+            angle.throughAngle = 2*M_PI - thisAngle;
+        }
+        if (ABS(angle.throughAngle - 2 * M_PI) < 0.0001) {
+            angle.throughAngle = 0;
+        }
+        Pin * pin = [self.pins objectAtIndex:i];
+        angle.position = pin.sprite.position;
+        totalAngle += M_PI - thisAngle;
+        
+        NSString * angleString = [NSString stringWithFormat:@"%.02f", CC_RADIANS_TO_DEGREES(angle.throughAngle)];
+        [angle.label setString:angleString];
+    }
+    
+    BOOL beforeAnticlockwise = self.anticlockwise;
+    if (totalAngle < 0 || ABS(totalAngle) < 1) {
+        self.anticlockwise = NO;
+    } else {
+        self.anticlockwise = YES;
+    }
+    
+    if (beforeAnticlockwise != self.anticlockwise) {
+        [self setAngles];
+    }
+}
+
+-(float)angleInCorrectRange:(float)angle {
+    angle = fmodf(angle, 2 * M_PI);
+    if (angle < 0) {
+        angle += 2 * M_PI;
+    }
+    return angle;
 }
 
 

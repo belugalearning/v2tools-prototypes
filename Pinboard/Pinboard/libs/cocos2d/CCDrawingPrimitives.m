@@ -258,6 +258,81 @@ void ccDrawCircle( CGPoint center, float r, float a, NSUInteger segs, BOOL drawL
 	CC_INCREMENT_GL_DRAWS(1);
 }
 
+void ccDrawArc(CGPoint center, float radius, float startAngle, float throughAngle, NSUInteger segs, BOOL anticlockwise) {
+    lazy_init();
+    
+	int additionalSegment = 1;
+    int multiplier = anticlockwise ? 1 : -1;
+    
+	const float coef = (float)M_PI/segs * multiplier * throughAngle/M_PI;
+    
+	GLfloat *vertices = calloc( sizeof(GLfloat)*2*(segs+2), 1);
+	if( ! vertices )
+		return;
+    
+	for(NSUInteger i = 0;i <= segs; i++) {
+		float rads = i*coef;
+		GLfloat j = radius * sinf(rads + startAngle) + center.x;
+		GLfloat k = radius * cosf(rads + startAngle) + center.y;
+        
+		vertices[i*2] = j;
+		vertices[i*2+1] = k;
+	}
+	vertices[(segs+1)*2] = center.x;
+	vertices[(segs+1)*2+1] = center.y;
+    
+	[shader_ use];
+	[shader_ setUniformForModelViewProjectionMatrix];
+	[shader_ setUniformLocation:colorLocation_ with4fv:(GLfloat*) &color_.r count:1];
+    
+	ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position );
+    
+	glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, 0, vertices);
+	glDrawArrays(GL_LINE_STRIP, 0, (GLsizei) segs+additionalSegment);
+    
+	free( vertices );
+	
+	CC_INCREMENT_GL_DRAWS(1);
+}
+
+void ccDrawSector(CGPoint center, float radius, float startAngle, float throughAngle, NSUInteger segs, BOOL anticlockwise) {
+    lazy_init();
+    
+	int additionalSegment = 1;
+    int multiplier = anticlockwise ? 1 : -1;
+    
+	const float coef = (float)M_PI/segs * multiplier * throughAngle/M_PI;
+    
+	GLfloat *vertices = calloc( sizeof(GLfloat)*2*(segs+2), 1);
+	if( ! vertices )
+		return;
+    
+    vertices[0] = center.x;
+    vertices[1] = center.y;
+    
+	for(NSUInteger i = 1;i <= segs; i++) {
+		float rads = i*coef;
+		GLfloat j = radius * sinf(rads + startAngle) + center.x;
+		GLfloat k = radius * cosf(rads + startAngle) + center.y;
+        
+		vertices[i*2] = j;
+		vertices[i*2+1] = k;
+	}
+    
+	[shader_ use];
+	[shader_ setUniformForModelViewProjectionMatrix];
+	[shader_ setUniformLocation:colorLocation_ with4fv:(GLfloat*) &color_.r count:1];
+    
+	ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position );
+    
+	glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, 0, vertices);
+	glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) segs+additionalSegment);
+    
+	free( vertices );
+	
+	CC_INCREMENT_GL_DRAWS(1);
+}
+
 void ccDrawQuadBezier(CGPoint origin, CGPoint control, CGPoint destination, NSUInteger segments)
 {
 	lazy_init();

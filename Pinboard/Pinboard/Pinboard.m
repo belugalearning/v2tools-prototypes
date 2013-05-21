@@ -24,19 +24,6 @@
         self.pins = [NSMutableArray array];
         self.bands = [NSMutableArray array];
         
-        /*
-        Angle * angle = [Angle new];
-        [self.background addChild:angle];
-        */
-
-
-        
-        /*
-        CGPoint firstPoint = ccp(0, 0);
-        float radius = 100;
-        ccDrawCircle(firstPoint, radius, M_PI, 10, NO);
-         */
-        
     }
     return self;
 }
@@ -128,6 +115,18 @@
     [self.bands removeObject:band];
     [self.bands insertObject:band atIndex:0];
     [self setBandsZIndexToPriorityOrder];
+    
+    for (Band * otherBand in self.bands) {
+        if (otherBand != band) {
+            for (Angle * angle in otherBand.angles) {
+                angle.label.visible = NO;
+            }
+        } else {
+            for (Angle * angle in band.angles) {
+                angle.label.visible = YES;
+            }
+        }
+    }
 }
 
 -(void)setBandsZIndexToPriorityOrder {
@@ -136,6 +135,11 @@
         Band * band = [self.bands objectAtIndex:numberOfBands - i];
         [self.background reorderChild:band.bandNode z:i];
     }
+}
+
+-(void)showAngles {
+    Band * band = [self.bands objectAtIndex:0];
+    [band showAngles];
 }
 
 @end

@@ -98,14 +98,20 @@
         bandSelectMenu.position = ccp(800, 700);
         [self addChild:bandSelectMenu];
         
+        CCMenuItem * showAnglesButton = [CCMenuItemImage itemWithNormalImage:@"showAnglesButton.png" selectedImage:@"showAnglesButton.png" target:self selector:@selector(showAnglesButtonTapped)];
+        CCMenu * bandPropertiesMenu = [CCMenu menuWithItems:showAnglesButton, nil];
+        bandPropertiesMenu.position = ccp(900, 500);
+        [self addChild:bandPropertiesMenu];
         
-        Pin * firstPin = [pinboard.pins objectAtIndex:1];
-        Pin * secondPin = [pinboard.pins objectAtIndex:5];
-        Pin * thirdPin = [pinboard.pins objectAtIndex:50];
-        Pin * fourthPin = [pinboard.pins objectAtIndex:40];
+        /*
+        Pin * firstPin = [pinboard.pins objectAtIndex:3];
+        Pin * secondPin = [pinboard.pins objectAtIndex:24];
+        Pin * thirdPin = [pinboard.pins objectAtIndex:56];
+        Pin * fourthPin = [pinboard.pins objectAtIndex:89];
         NSMutableArray * array = [NSMutableArray arrayWithObjects:firstPin, secondPin, thirdPin, fourthPin, nil];
         Band * band = [Band bandWithPinboard:pinboard andPins:array];
         [band setupBand];
+         */
         
 
         [[director touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
@@ -195,11 +201,13 @@
 }
 
 -(void)addBandTapped {
-    Band * newBand = [pinboard newBand];
-    CCMenuItemImage * bandSelectButtonImage = [CCMenuItemImage itemWithNormalImage:@"bandButton.png" selectedImage:@"bandButton.png" target:pinboard selector:@selector(selectBandFromButton:)];
-    bandSelectButtonImage.userObject = newBand;
-    bandSelectButtonImage.color = newBand.colour;
-    [self addBandSelectButton:bandSelectButtonImage];
+    if ([pinboard.bands count] < 24) {
+        Band * newBand = [pinboard newBand];
+        CCMenuItemImage * bandSelectButtonImage = [CCMenuItemImage itemWithNormalImage:@"bandButton.png" selectedImage:@"bandButton.png" target:pinboard selector:@selector(selectBandFromButton:)];
+        bandSelectButtonImage.userObject = newBand;
+        bandSelectButtonImage.color = newBand.colour;
+        [self addBandSelectButton:bandSelectButtonImage];
+    }
 }
 
 -(void)addBandSelectButton:(CCMenuItem *)newButton {
@@ -209,6 +217,10 @@
     int yPosition = 0 - 30 * (numberOfButtons/numberOfRows);
     newButton.position = ccp(xPosition, yPosition);
     [bandSelectMenu addChild:newButton];
+}
+
+-(void)showAnglesButtonTapped {
+    [pinboard showAngles];
 }
 
 #pragma mark GameKit delegate
