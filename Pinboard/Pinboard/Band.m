@@ -335,10 +335,12 @@
     }
     
     BOOL beforeAnticlockwise = self.anticlockwise;
-    if (totalAngle < 0 || ABS(totalAngle) < 1) {
-        self.anticlockwise = NO;
-    } else {
-        self.anticlockwise = YES;
+    if (ABS(totalAngle) > 1) {
+        if (totalAngle < 0 || ABS(totalAngle) < 1) {
+            self.anticlockwise = NO;
+        } else {
+            self.anticlockwise = YES;
+        }
     }
     
     if (beforeAnticlockwise != self.anticlockwise) {
