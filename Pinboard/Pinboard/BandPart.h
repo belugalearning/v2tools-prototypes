@@ -27,5 +27,6 @@
 -(NSArray *)adjacentPins;
 -(void)setPositionAndRotation;
 -(float)length;
+-(BOOL)parallelTo:(BandPart *)otherPart;
 
 @end

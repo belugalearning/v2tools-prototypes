@@ -400,5 +400,143 @@
     }
 }
 
+-(BOOL)regular {
+    BOOL regular = YES;
+    BandPart * firstBandPart = [self.bandParts objectAtIndex:0];
+    float sideLength = [firstBandPart length];
+    for (BandPart * bandPart in self.bandParts) {
+        float thisLength = [bandPart length];
+        if (ABS(thisLength - sideLength) > 0.0001) {
+            regular = NO;
+            break;
+        }
+    }
+    if (regular) {
+        Angle * angle = [self.angles objectAtIndex:0];
+        float angleValue = angle.throughAngle;
+        for (Angle * angle in self.angles) {
+            float thisAngleValue = angle.throughAngle;
+            if (ABS(thisAngleValue - angleValue) > 0.0001) {
+                regular = NO;
+                break;
+            }
+        }
+    }
+    return regular;
+}
+
+-(NSString *)shape {
+    int numberOfSides = [self.bandParts count];
+    NSString * shapeName;
+    
+    switch (numberOfSides) {
+        case 3:
+            shapeName = [self triangleName];
+            break;
+        case 4:
+            shapeName = [self quadrilateralName];
+            break;
+        case 5:
+            shapeName = @"Pentagon";
+            break;
+        case 6:
+            shapeName = @"Hexagon";
+            break;
+        case 7:
+            shapeName = @"Heptagon";
+            break;
+        case 8:
+            shapeName = @"Octagon";
+            break;
+        case 9:
+            shapeName = @"Nonagon";
+            break;
+        case 10:
+            shapeName = @"Decagon";
+            break;
+        default:
+            if (numberOfSides < 3) {
+                shapeName = @"";
+            } else if (numberOfSides > 10) {
+                shapeName = @"Polygon";
+            }
+            break;
+    }
+    return shapeName;
+}
+
+-(NSString *)triangleName {
+    NSString * triangleName;
+    float sides[3];
+    for (int i = 0; i < 3; i++) {
+        BandPart * bandPart = [self.bandParts objectAtIndex:i];
+        sides[i] = [bandPart length];
+    }
+    if ([self aFloat:sides[0] closeTo:sides[1]] && [self aFloat:sides[1] closeTo:sides[2]]) {
+        triangleName = @"Equilateral triangle";
+    } else if ([self aFloat:sides[0] closeTo:sides[1]]
+               || [self aFloat:sides[1] closeTo:sides[2]]
+               || [self aFloat:sides[2] closeTo:sides[0]]) {
+        triangleName = @"Isosceles triangle";
+    } else {
+        triangleName = @"Scalene triangle";
+    }
+    return triangleName;
+}
+
+-(NSString *)quadrilateralName {
+    NSString * quadrilateralName;
+    float angles[4];
+    BOOL allRightAngles = YES;
+    for (int i = 0; i < 4; i++) {
+        Angle * angle = [self.angles objectAtIndex:i];
+        angles[i] = angle.throughAngle;
+        if (![self aFloat:angle.throughAngle closeTo:M_PI_2]) {
+            allRightAngles = NO;
+        }
+    }
+    float sides[4];
+    BandPart * firstSide = [self.bandParts objectAtIndex:0];
+    sides[0] = [firstSide length];
+    BOOL sidesEqual = YES;
+    for (int i = 0; i < 4; i++) {
+        BandPart * bandPart = [self.bandParts objectAtIndex:i];
+        sides[i] = [bandPart length];
+        if (![self aFloat:sides[i] closeTo:sides[0]]) {
+            sidesEqual = NO;
+        }
+    }
+    
+    if (allRightAngles) {
+        if (sidesEqual) {
+            quadrilateralName = @"Square";
+        } else {
+            quadrilateralName = @"Rectangle";
+        }
+    } else {
+        if (sidesEqual) {
+            quadrilateralName = @"Rhombus";
+        } else if ([[self.bandParts objectAtIndex:0] parallelTo:[self.bandParts objectAtIndex:2]]
+                   && [[self.bandParts objectAtIndex:1] parallelTo:[self.bandParts objectAtIndex:3]]) {
+                quadrilateralName = @"Parallelogram";
+        } else if (([self aFloat:sides[0] closeTo:sides[1]] && [self aFloat:sides[2] closeTo:sides[3]])
+                   || ([self aFloat:sides[1] closeTo:sides[2]] && [self aFloat:sides[3] closeTo:sides[0]])) {
+            quadrilateralName = @"Kite";
+        } else if ([[self.bandParts objectAtIndex:0] parallelTo:[self.bandParts objectAtIndex:2]]
+                   || [[self.bandParts objectAtIndex:1] parallelTo:[self.bandParts objectAtIndex:3]]) {
+            quadrilateralName = @"Trapezium";
+        } else {
+            quadrilateralName = @"Quadrilateral";
+        }
+    }
+    return quadrilateralName;
+}
+
+-(BOOL)aFloat:(float)firstFloat closeTo:(float)secondFloat {
+    return ABS(firstFloat - secondFloat) < 0.001;
+}
+
+
+
 
 @end

@@ -6,6 +6,7 @@
 //  Copyright 2013 __MyCompanyName__. All rights reserved.
 //
 
+#import "PinboardLayer.h"
 #import "Pinboard.h"
 #import "Pin.h"
 #import "Band.h"
@@ -16,14 +17,13 @@
     Band * movingBand;
 }
 
-@synthesize background = background_, pins = pins_;
+@synthesize background = background_, pins = pins_, layer = layer_;
 
 -(id)init {
     if (self = [super init]) {
         self.background = [CCSprite spriteWithFile:@"background.png"];
         self.pins = [NSMutableArray array];
         self.bands = [NSMutableArray array];
-        
     }
     return self;
 }
@@ -87,6 +87,7 @@
             [movingBand removeMovingPin];
         }
         [movingBand processEnd:touchLocation];
+        [self setPropertyIndicatorsFor:movingBand];
     }
     movingBand = nil;
 }
@@ -145,6 +146,17 @@
 -(void)showSideLengths {
     Band * band = [self.bands objectAtIndex:0];
     [band showSideLengths];
+}
+
+-(void)setPropertyIndicatorsFor:(Band *)band {
+    BOOL regular = [band regular];
+    [self.layer setRegularIndicatorWithRegular:regular];
+    NSString * shapeName = [band shape];
+    [self.layer setShapeIndicatorWith:shapeName];
+}
+
+-(float)unitDistance {
+    return 0;
 }
 
 @end

@@ -28,6 +28,9 @@
     Pin * movingPin;
 }
 
+-(void)setRegularIndicatorWithRegular:(BOOL)regular;
+-(void)setShapeIndicatorWith:(NSString *)shapeName;
+
 // returns a CCScene that contains the PinboardLayer as the only child
 +(CCScene *) scene;
 

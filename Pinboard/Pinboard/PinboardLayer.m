@@ -28,6 +28,9 @@
     int circularNumberOfPins;
     BOOL circularIncludeCentre;
     CCMenu * bandSelectMenu;
+    CCLayer * layer;
+    CCLabelTTF * regularIndicatorLabel;
+    CCLabelTTF * shapeIndicatorLabel;
 }
 
 // Helper class method that creates a Scene with the HelloWorldLayer as the only child.
@@ -98,11 +101,31 @@
         bandSelectMenu.position = ccp(800, 700);
         [self addChild:bandSelectMenu];
         
+        CCNode * propertiesIndicator = [CCNode node];
+        propertiesIndicator.position = ccp(900, 500);
+        [self addChild:propertiesIndicator];
+        
+        CCSprite * regularIndicator = [CCSprite spriteWithFile:@"propertyBackground.png"];
+        regularIndicatorLabel = [CCLabelTTF labelWithString:@"" fontName:@"Arial" fontSize:24];
+        regularIndicatorLabel.color = ccc3(0, 0, 0);
+        regularIndicatorLabel.position = ccp(regularIndicator.contentSize.width * regularIndicator.scaleX/2, regularIndicator.contentSize.height * regularIndicator.scaleY/2);
+        [regularIndicator addChild:regularIndicatorLabel];
+        [propertiesIndicator addChild:regularIndicator];
+        
+        CCSprite * shapeIndicator = [CCSprite spriteWithFile:@"propertyBackground.png"];
+        shapeIndicatorLabel = [CCLabelTTF labelWithString:@"" fontName:@"Arial" fontSize:24];
+        shapeIndicatorLabel.color = ccc3(0, 0, 0);
+        shapeIndicatorLabel.position = ccp(shapeIndicator.contentSize.width * shapeIndicator.scaleX/2, shapeIndicator.contentSize.height * shapeIndicator.scaleY/2);
+        shapeIndicator.position = ccp(0, -80);
+        [shapeIndicator addChild:shapeIndicatorLabel];
+        [propertiesIndicator addChild:shapeIndicator];
+        
+        
         CCMenuItem * showAnglesButton = [CCMenuItemImage itemWithNormalImage:@"showAnglesButton.png" selectedImage:@"showAnglesButton.png" target:self selector:@selector(showAnglesButtonTapped)];
         CCMenuItem * showSideLengthsButton = [CCMenuItemImage itemWithNormalImage:@"showSideLengthsButton.png" selectedImage:@"showSideLengthsButton.png" target:self selector:@selector(showSideLengthsButtonTapped)];
         showSideLengthsButton.position = ccp(0, -80);
         CCMenu * bandPropertiesMenu = [CCMenu menuWithItems:showAnglesButton, showSideLengthsButton, nil];
-        bandPropertiesMenu.position = ccp(900, 500);
+        bandPropertiesMenu.position = ccp(900, 300);
         [self addChild:bandPropertiesMenu];
         
         /*
@@ -124,6 +147,7 @@
 -(void)setupPinboard {
     [pinboard setPosition:ccp(size.width/2, size.height/2)];
     [pinboard addToNode:self];
+    pinboard.layer = self;
 }
 
 -(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
@@ -227,6 +251,15 @@
 
 -(void)showSideLengthsButtonTapped {
     [pinboard showSideLengths];
+}
+
+-(void)setRegularIndicatorWithRegular:(BOOL)regular {
+    NSString * string = regular ? @"Regular" : @"Irregular";
+    [regularIndicatorLabel setString:string];
+}
+
+-(void)setShapeIndicatorWith:(NSString *)shapeName {
+    [shapeIndicatorLabel setString:shapeName];
 }
 
 #pragma mark GameKit delegate

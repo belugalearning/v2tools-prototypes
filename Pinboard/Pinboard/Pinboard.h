@@ -18,12 +18,14 @@ typedef enum {
 
 @class Pin;
 @class Band;
+@class PinboardLayer;
 @interface Pinboard : NSObject {
 }
 
 @property (readwrite) NSMutableArray * pins;
 @property (readwrite) CCSprite * background;
 @property (readwrite) NSMutableArray * bands;
+@property (readwrite) PinboardLayer * layer;
 
 -(void)addToNode:(CCNode *)node;
 -(void)setPosition:(CGPoint)position;

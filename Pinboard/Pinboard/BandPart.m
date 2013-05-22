@@ -69,7 +69,29 @@
 -(float)length {
     float pinDistance = [self pinDistance];
     float distanceBetweenPins = [self.band.pinboard unitDistance];
-    return pinDistance/distanceBetweenPins;
+    float length = pinDistance/distanceBetweenPins;
+    return length;
 }
+
+-(BOOL)parallelTo:(BandPart *)otherPart {
+    BOOL parallel;
+    if (self.fromPin == self.toPin || otherPart.fromPin == otherPart.toPin) {
+        parallel = NO;
+    } else {
+        float selfRun = self.toPin.sprite.position.x - self.fromPin.sprite.position.x;
+        float selfRise = self.toPin.sprite.position.y - self.fromPin.sprite.position.y;
+        float otherPartRun = otherPart.toPin.sprite.position.x - otherPart.fromPin.sprite.position.x;
+        float otherPartRise = otherPart.toPin.sprite.position.y - otherPart.fromPin.sprite.position.y;
+        float leftHandSide = selfRise * otherPartRun;
+        float rightHandSide = otherPartRise * selfRun;
+        if (ABS(leftHandSide - rightHandSide) < 0.001) {
+            parallel = YES;
+        } else {
+            parallel = NO;
+        }
+    }
+    return parallel;
+}
+
 
 @end
