@@ -19,7 +19,10 @@
     BandPart * entryPart;
     BandPart * exitPart;
     BOOL showAngles;
+    BOOL showSideLengths;
     CCNode * angleNode;
+    CCNode * sideLengthsNode;
+    NSMutableArray * sideLengthLabels;
 }
 
 @synthesize pins = pins_, bandParts = bandParts_, colour = colour_, bandNode = bandNode_, angles = angles_, anticlockwise = anticlockwise_, propertiesNode = propertiesNode_;
@@ -38,17 +41,7 @@
         int blue = arc4random_uniform(255);
         self.colour = ccc3(red, green, blue);
         
-        
-        self.propertiesNode = [CCNode node];
-        self.propertiesNode.zOrder = 1;
-        [self.bandNode addChild:self.propertiesNode];
-        
-        angleNode = [CCNode node];
-        [self.propertiesNode addChild:angleNode];
-        self.angles = [NSMutableArray array];
-        showAngles = NO;
-        angleNode.visible = NO;
-        [self recalculateAngles];
+        sideLengthLabels = [NSMutableArray array];
     }
     return self;
     
@@ -72,20 +65,29 @@
         Pin * lastPin = [self.pins objectAtIndex:numberOfPins - 1];
         [self addBandPartFrom:lastPin to:firstPin withIndex:numberOfPins - 1];
     }
+    [self setupPropertiesNode];
     [self setPositionAndRotationOfBandParts];
+}
+
+-(void)setupPropertiesNode {
+    self.propertiesNode = [CCNode node];
+    self.propertiesNode.zOrder = 1;
+    [self.bandNode addChild:self.propertiesNode];
     
-    /*
-    int numberOfBandParts = [self.bandParts count];
-    for (int i = 0; i < numberOfBandParts; i++) {
-        BandPart * bandPart = [self.bandParts objectAtIndex:i];
-        BandPart * nextBandPart = [self.bandParts objectAtIndex:(i+1)%numberOfBandParts];
-        Angle * angle = [Angle new];
-        angle.position = bandPart.toPin.sprite.position;
-    }
-     */
+    sideLengthsNode = [CCNode node];
+    [self.propertiesNode addChild:sideLengthsNode];
+    sideLengthsNode.visible = NO;
+    showSideLengths = NO;
+    [self recalculateSideLengths];
+    [self setSideLengths];
     
+    angleNode = [CCNode node];
+    [self.propertiesNode addChild:angleNode];
+    self.angles = [NSMutableArray array];
+    showAngles = NO;
+    angleNode.visible = NO;
+    [self recalculateAngles];
     [self setAngles];
-     
 }
 
 -(void)setPositionAndRotationOfBandParts {
@@ -142,6 +144,7 @@
     }
     [self setPositionAndRotationOfBandParts];
     [self setAngles];
+    [self setSideLengths];
 }
 
 -(void)splitBandPart:(int)index at:(CGPoint)touchLocation {
@@ -176,6 +179,7 @@
     
     [bandPart.sprite.parent removeFromParentAndCleanup:YES];
     [self recalculateAngles];
+    [self recalculateSideLengths];
 }
 
 -(void)unpinBandFromPin:(int)index {
@@ -214,6 +218,7 @@
     movingPin.sprite.position = touchLocation;
     [self setPositionAndRotationOfBandParts];
     [self setAngles];
+    [self setSideLengths];
 }
 
 -(void)processEnd:(CGPoint)touchLocation {
@@ -224,6 +229,7 @@
     [self setPositionAndRotationOfBandParts];
     [self cleanPins];
     [self setAngles];
+    [self setSideLengths];
 }
 
 -(void)pinBandOnPin:(Pin *)pin {
@@ -250,6 +256,7 @@
     [movingPin.sprite removeFromParentAndCleanup:YES];
     
     [self recalculateAngles];
+    [self recalculateSideLengths];
 }
 
 -(void)cleanPins {
@@ -354,6 +361,43 @@
         angle += 2 * M_PI;
     }
     return angle;
+}
+
+-(void)showSideLengths {
+    showSideLengths = !showSideLengths;
+    sideLengthsNode.visible = showSideLengths;
+}
+
+-(void)recalculateSideLengths {
+    int numberOfBandParts = [self.bandParts count];
+    [sideLengthsNode removeAllChildrenWithCleanup:YES];
+    [sideLengthLabels removeAllObjects];
+    for (int i = 0; i < numberOfBandParts; i++) {
+        CCLabelTTF * label = [CCLabelTTF labelWithString:@"" fontName:@"Arial" fontSize:12];
+        label.color = ccc3(0, 0, 0);
+        CCSprite * labelBackground = [CCSprite spriteWithFile:@"sideLengthBackground.png"];
+        labelBackground.color = self.colour;
+        [sideLengthLabels addObject:label];
+        label.position = ccp(labelBackground.contentSize.width * labelBackground.scaleX/2, labelBackground.contentSize.height * labelBackground.scaleY/2);
+        [labelBackground addChild:label];
+        [sideLengthsNode addChild:labelBackground];
+
+    }
+    [self setSideLengths];
+}
+
+-(void)setSideLengths {
+    int numberOfBandParts = [self.bandParts count];
+    for (int i = 0; i < numberOfBandParts; i++) {
+        BandPart * bandPart = [self.bandParts objectAtIndex:i];
+        float length = [bandPart length];
+        NSString * lengthString = [NSString stringWithFormat:@"%.02f", length];
+        CCLabelTTF * label = [sideLengthLabels objectAtIndex:i];
+        float labelXPosition = (bandPart.fromPin.sprite.position.x + bandPart.toPin.sprite.position.x)/2.0;
+        float labelYPosition = (bandPart.fromPin.sprite.position.y + bandPart.toPin.sprite.position.y)/2.0;
+        label.parent.position = ccp(labelXPosition, labelYPosition);
+        [label setString:lengthString];
+    }
 }
 
 

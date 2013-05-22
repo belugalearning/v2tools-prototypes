@@ -37,5 +37,7 @@ typedef enum {
 -(void)setMovingBand:(Band *)band;
 -(Band *)newBand;
 -(void)showAngles;
+-(void)showSideLengths;
+-(float)unitDistance;
 
 @end

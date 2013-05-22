@@ -142,4 +142,9 @@
     [band showAngles];
 }
 
+-(void)showSideLengths {
+    Band * band = [self.bands objectAtIndex:0];
+    [band showSideLengths];
+}
+
 @end

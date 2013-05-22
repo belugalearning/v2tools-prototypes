@@ -9,6 +9,7 @@
 #import "BandPart.h"
 #import "Pin.h"
 #import "Band.h"
+#import "Pinboard.h"
 
 @implementation BandPart
 
@@ -53,11 +54,22 @@
     float angle = atan2f(toPin.sprite.position.x - fromPin.sprite.position.x,
                          toPin.sprite.position.y - fromPin.sprite.position.y);
     self.baseNode.rotation = CC_RADIANS_TO_DEGREES(angle);
-    CGPoint fromPosition = [self.band.bandNode convertToNodeSpace:fromPin.sprite.position];
-    CGPoint toPosition = [self.band.bandNode convertToNodeSpace:toPin.sprite.position];
-    float pinDistance = ccpDistance(fromPosition, toPosition);
+    float pinDistance = [self pinDistance];
     float scaleFactor = pinDistance/self.sprite.contentSize.height;
     self.baseNode.scaleY = scaleFactor;
+}
+
+-(float)pinDistance {
+    CGPoint fromPosition = [self.band.bandNode convertToNodeSpace:self.fromPin.sprite.position];
+    CGPoint toPosition = [self.band.bandNode convertToNodeSpace:self.toPin.sprite.position];
+    float pinDistance = ccpDistance(fromPosition, toPosition);
+    return pinDistance;
+}
+
+-(float)length {
+    float pinDistance = [self pinDistance];
+    float distanceBetweenPins = [self.band.pinboard unitDistance];
+    return pinDistance/distanceBetweenPins;
 }
 
 @end

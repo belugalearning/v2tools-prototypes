@@ -25,6 +25,7 @@
 @property (readwrite) NSMutableArray * angles;
 @property (readwrite) BOOL anticlockwise;
 @property (readwrite) CCNode * propertiesNode;
+@property (readwrite) NSMutableArray * sideLengths;
 
 -(id)initWithPinboard:(Pinboard *)pinboard andPins:(NSMutableArray *)pins;
 +(id)bandWithPinboard:(Pinboard *)pinboard andPins:(NSMutableArray *)pins;
@@ -35,5 +36,6 @@
 -(void)setupBand;
 -(void)removeMovingPin;
 -(void)showAngles;
+-(void)showSideLengths;
 
 @end

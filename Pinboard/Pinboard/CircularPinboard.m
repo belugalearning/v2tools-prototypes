@@ -64,4 +64,8 @@
     [super setupPins];
 }
 
+-(float)unitDistance {
+    return self.radius;
+}
+
 @end

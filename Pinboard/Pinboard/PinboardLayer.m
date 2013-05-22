@@ -99,7 +99,9 @@
         [self addChild:bandSelectMenu];
         
         CCMenuItem * showAnglesButton = [CCMenuItemImage itemWithNormalImage:@"showAnglesButton.png" selectedImage:@"showAnglesButton.png" target:self selector:@selector(showAnglesButtonTapped)];
-        CCMenu * bandPropertiesMenu = [CCMenu menuWithItems:showAnglesButton, nil];
+        CCMenuItem * showSideLengthsButton = [CCMenuItemImage itemWithNormalImage:@"showSideLengthsButton.png" selectedImage:@"showSideLengthsButton.png" target:self selector:@selector(showSideLengthsButtonTapped)];
+        showSideLengthsButton.position = ccp(0, -80);
+        CCMenu * bandPropertiesMenu = [CCMenu menuWithItems:showAnglesButton, showSideLengthsButton, nil];
         bandPropertiesMenu.position = ccp(900, 500);
         [self addChild:bandPropertiesMenu];
         
@@ -221,6 +223,10 @@
 
 -(void)showAnglesButtonTapped {
     [pinboard showAngles];
+}
+
+-(void)showSideLengthsButtonTapped {
+    [pinboard showSideLengths];
 }
 
 #pragma mark GameKit delegate

@@ -73,4 +73,8 @@
     return onBackgound;
 }
 
+-(float)unitDistance {
+    return self.distanceBetweenPins;
+}
+
 @end

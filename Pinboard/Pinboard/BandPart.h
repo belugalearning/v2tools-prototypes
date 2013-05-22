@@ -26,5 +26,6 @@
 +(id)bandPartWithBand:(Band *)band fromPin:(Pin *)fromPin toPin:(Pin *)toPin;
 -(NSArray *)adjacentPins;
 -(void)setPositionAndRotation;
+-(float)length;
 
 @end
