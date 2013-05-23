@@ -254,10 +254,12 @@
 
 -(void)showSideLengthsButtonTapped {
     [pinboard setCurrentBandSideDisplay:@"sideLengths"];
+    [pinboard recalculateSameSideLengths];
 }
 
 -(void)showSameSideLengthButtonTapped {
     [pinboard setCurrentBandSideDisplay:@"sameSideLengths"];
+    [pinboard recalculateSameSideLengths];
 }
 
 -(void)setRegularIndicatorWithRegular:(NSString *)regular {

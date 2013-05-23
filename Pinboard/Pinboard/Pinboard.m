@@ -12,6 +12,7 @@
 #import "Band.h"
 #import "CCSprite_SpriteTouchExtensions.h"
 #import "Angle.h"
+#import "BandPart.h"
 
 @implementation Pinboard {
     Band * movingBand;
@@ -88,6 +89,7 @@
         }
         [movingBand processEnd:touchLocation];
         [self setPropertyIndicatorsFor:movingBand];
+        [self recalculateSameSideLengths];
     }
     movingBand = nil;
 }
@@ -117,19 +119,6 @@
     [self.bands insertObject:band atIndex:0];
     [self setBandsZIndexToPriorityOrder];
     [self setPropertyIndicatorsFor:band];
-    /*
-    for (Band * otherBand in self.bands) {
-        if (otherBand != band) {
-            for (Angle * angle in otherBand.angles) {
-                angle.label.visible = NO;
-            }
-        } else {
-            for (Angle * angle in band.angles) {
-                angle.label.visible = YES;
-            }
-        }
-    }
-     */
 }
 
 -(void)setBandsZIndexToPriorityOrder {
@@ -145,18 +134,6 @@
     [band showAngles];
 }
 
-/*
--(void)showSideLengths {
-    Band * band = [self.bands objectAtIndex:0];
-    [band showSideLengths];
-}
-
--(void)showSameSideLength {
-    Band * band = [self.bands objectAtIndex:0];
-    [band showSameSideLength];
-}
- */
-
 -(void)setCurrentBandSideDisplay:(NSString *)sideDisplay {
     Band * band = [self.bands objectAtIndex:0];
     [band toggleSideDisplay:sideDisplay];
@@ -171,6 +148,42 @@
 
 -(float)unitDistance {
     return 0;
+}
+
+-(void)recalculateSameSideLengths {
+    NSMutableArray * allBands = self.bands;
+    NSMutableArray * bandParts = [NSMutableArray array];
+    for (Band * band in allBands) {
+        if ([band.sideDisplay isEqualToString:@"sameSideLengths"]) {
+            [band clearSameSideLengthNotches];
+            if ([band.pins count] == 2) {
+                [bandParts addObject:[band.bandParts objectAtIndex:0]];
+            } else {
+                [bandParts addObjectsFromArray:band.bandParts];
+            }
+        }
+    }
+    int numberOfNotches = 1;
+    while ([bandParts count] > 0) {
+        BandPart * bandPart = [bandParts objectAtIndex:0];
+        NSMutableArray * sameLengthBandParts = [NSMutableArray array];
+        [sameLengthBandParts addObject:bandPart];
+        for (int i = 1; i < [bandParts count]; i++) {
+            BandPart * otherBandPart = [bandParts objectAtIndex:i];
+            if (ABS([bandPart length] - [otherBandPart length]) < 0.001) {
+                [sameLengthBandParts addObject:otherBandPart];
+            }
+        }
+        if ([sameLengthBandParts count] > 1) {
+            for (BandPart * bandPart in sameLengthBandParts) {
+                [bandPart addNotches:numberOfNotches];
+            }
+            numberOfNotches++;
+        }
+        for (BandPart * bandPart in sameLengthBandParts) {
+            [bandParts removeObject:bandPart];
+        }
+    }
 }
 
 @end

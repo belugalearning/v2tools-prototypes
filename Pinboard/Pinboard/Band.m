@@ -82,7 +82,7 @@
     [self recalculateSideLengths];
 
     self.sameSideLengthNotches = [NSMutableArray array];
-    [self recalculateSameSideLengths];
+    [self.pinboard recalculateSameSideLengths];
     
     angleNode = [CCNode node];
     [self.propertiesNode addChild:angleNode];
@@ -236,7 +236,6 @@
     [self cleanPins];
     [self setAngles];
     [self setSideLengths];
-    [self recalculateSameSideLengths];
 }
 
 -(void)pinBandOnPin:(Pin *)pin {
@@ -445,8 +444,16 @@
     [sameSideLengthNotchesArray removeAllObjects];
 }
 
+/*
 -(void)recalculateSameSideLengths {
-    NSMutableArray * bandParts = [NSMutableArray arrayWithArray:self.bandParts];
+    NSMutableArray * allBands = self.pinboard.bands;
+    NSMutableArray * bandParts = [NSMutableArray array];
+    for (Band * band in allBands) {
+        if ([band.sideDisplay isEqualToString:@"sameSideLengths"]) {
+            [band clearSameSideLengthNotches];
+            [bandParts addObjectsFromArray:band.bandParts];
+        }
+    }
     int numberOfNotches = 1;
     while ([bandParts count] > 0) {
         BandPart * bandPart = [bandParts objectAtIndex:0];
@@ -469,7 +476,7 @@
         }
     }
 }
-
+*/
 -(void)sameSideLengthNotchesVisible:(BOOL)visible {
     for (CCSprite * notch in self.sameSideLengthNotches) {
         notch.visible = visible;

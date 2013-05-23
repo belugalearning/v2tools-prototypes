@@ -42,5 +42,6 @@
 -(NSString *)shape;
 -(void)displaySides;
 -(void)toggleSideDisplay:(NSString *)sideDisplay;
+-(void)clearSameSideLengthNotches;
 
 @end
