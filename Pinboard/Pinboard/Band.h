@@ -26,6 +26,8 @@
 @property (readwrite) BOOL anticlockwise;
 @property (readwrite) CCNode * propertiesNode;
 @property (readwrite) NSMutableArray * sideLengths;
+@property (readwrite) NSString * sideDisplay;
+@property (readwrite) NSMutableArray * sameSideLengthNotches;
 
 -(id)initWithPinboard:(Pinboard *)pinboard andPins:(NSMutableArray *)pins;
 +(id)bandWithPinboard:(Pinboard *)pinboard andPins:(NSMutableArray *)pins;
@@ -36,8 +38,9 @@
 -(void)setupBand;
 -(void)removeMovingPin;
 -(void)showAngles;
--(void)showSideLengths;
 -(NSString *)regular;
 -(NSString *)shape;
+-(void)displaySides;
+-(void)toggleSideDisplay:(NSString *)sideDisplay;
 
 @end

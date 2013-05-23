@@ -39,7 +39,7 @@ typedef enum {
 -(void)setMovingBand:(Band *)band;
 -(Band *)newBand;
 -(void)showAngles;
--(void)showSideLengths;
+-(void)setCurrentBandSideDisplay:(NSString *)sideDisplay;
 -(float)unitDistance;
 
 @end

@@ -145,9 +145,21 @@
     [band showAngles];
 }
 
+/*
 -(void)showSideLengths {
     Band * band = [self.bands objectAtIndex:0];
     [band showSideLengths];
+}
+
+-(void)showSameSideLength {
+    Band * band = [self.bands objectAtIndex:0];
+    [band showSameSideLength];
+}
+ */
+
+-(void)setCurrentBandSideDisplay:(NSString *)sideDisplay {
+    Band * band = [self.bands objectAtIndex:0];
+    [band toggleSideDisplay:sideDisplay];
 }
 
 -(void)setPropertyIndicatorsFor:(Band *)band {

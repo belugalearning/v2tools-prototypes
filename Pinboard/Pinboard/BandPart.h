@@ -20,6 +20,7 @@
 @property (readwrite) Pin * fromPin;
 @property (readwrite) Pin * toPin;
 @property (readwrite) Band * band;
+@property (readwrite) CCNode * bandPartNode;
 
 -(id)initWithBand:(Band *)band fromPin:(Pin *)fromPin toPin:(Pin *)toPin;
 -(void)setToBeFromPin:(Pin *)fromPin toPin:(Pin *)toPin;
@@ -28,5 +29,6 @@
 -(void)setPositionAndRotation;
 -(float)length;
 -(BOOL)parallelTo:(BandPart *)otherPart;
+-(void)addNotches:(int)numberOfNotches;
 
 @end

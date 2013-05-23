@@ -11,22 +11,29 @@
 #import "Band.h"
 #import "Pinboard.h"
 
-@implementation BandPart
+@implementation BandPart {
+    CCNode * notchNode;
+}
 
-@synthesize sprite = _sprite, fromPin = _fromPin, toPin = _toPin, baseNode = _baseNode;
+@synthesize sprite = _sprite, fromPin = _fromPin, toPin = _toPin, baseNode = _baseNode, bandPartNode = bandPartNode_;
 
 -(id)initWithBand:(Band *)band fromPin:(Pin *)fromPin toPin:(Pin *)toPin {
     if (self = [super init]) {
         self.baseNode = [CCNode node];
+        notchNode = [CCNode node];
+        self.bandPartNode = [CCNode node];
         self.band = band;
         self.sprite = [CCSprite spriteWithFile:@"bandPart.png"];
         self.sprite.anchorPoint = ccp(0.5, 0);
-        [self.baseNode addChild:self.sprite];
+        [self.bandPartNode addChild:self.sprite];
         self.baseNode.anchorPoint = ccp(0.5, 0);
         self.sprite.color = band.colour;
         
         self.fromPin = fromPin;
         self.toPin = toPin;
+
+        [self.baseNode addChild:notchNode];
+        [self.baseNode addChild:self.bandPartNode];
     }
     return self;
 }
@@ -50,13 +57,15 @@
 -(void)setPositionAndRotation {
     Pin * fromPin = self.fromPin;
     Pin * toPin = self.toPin;
-    self.baseNode.position = fromPin.sprite.position;
+    self.bandPartNode.position = fromPin.sprite.position;
+    notchNode.position = self.bandPartNode.position;
     float angle = atan2f(toPin.sprite.position.x - fromPin.sprite.position.x,
                          toPin.sprite.position.y - fromPin.sprite.position.y);
-    self.baseNode.rotation = CC_RADIANS_TO_DEGREES(angle);
+    self.bandPartNode.rotation = CC_RADIANS_TO_DEGREES(angle);
+    notchNode.rotation = self.bandPartNode.rotation;
     float pinDistance = [self pinDistance];
     float scaleFactor = pinDistance/self.sprite.contentSize.height;
-    self.baseNode.scaleY = scaleFactor;
+    self.bandPartNode.scaleY = scaleFactor;
 }
 
 -(float)pinDistance {
@@ -91,6 +100,23 @@
         }
     }
     return parallel;
+}
+
+-(void)addNotches:(int)numberOfNotches {
+    float gap = 3;
+    for (int i = 1; i <= numberOfNotches; i++) {
+        CCSprite * sameSideLengthNotch = [CCSprite spriteWithFile:@"sameSideLengthNotch.png"];
+        float notchWidth = sameSideLengthNotch.contentSize.width;
+        sameSideLengthNotch.rotation = 90;
+        float halfway = self.sprite.contentSize.height * self.bandPartNode.scaleY/2;
+        float offset = (2*i-numberOfNotches-1)*(gap + notchWidth)/2;
+        float yPosition = halfway + offset;
+        sameSideLengthNotch.position = ccp(0, yPosition);
+        sameSideLengthNotch.color = self.band.colour;
+        sameSideLengthNotch.visible = [self.band.sideDisplay isEqualToString:@"sameSideLengths"];
+        [notchNode addChild:sameSideLengthNotch];
+        [[self.band sameSideLengthNotches] addObject:sameSideLengthNotch];
+    }
 }
 
 

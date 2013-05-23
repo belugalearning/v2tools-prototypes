@@ -13,19 +13,18 @@
 #import "CCSprite_SpriteTouchExtensions.h"
 #import "Angle.h"
 
-
 @implementation Band {
     Pin * movingPin;
     BandPart * entryPart;
     BandPart * exitPart;
     BOOL showAngles;
-    BOOL showSideLengths;
     CCNode * angleNode;
     CCNode * sideLengthsNode;
     NSMutableArray * sideLengthLabels;
+    NSMutableArray * sameSideLengthNotchesArray;
 }
 
-@synthesize pins = pins_, bandParts = bandParts_, colour = colour_, bandNode = bandNode_, angles = angles_, anticlockwise = anticlockwise_, propertiesNode = propertiesNode_;
+@synthesize pins = pins_, bandParts = bandParts_, colour = colour_, bandNode = bandNode_, angles = angles_, anticlockwise = anticlockwise_, propertiesNode = propertiesNode_, sideDisplay = sideDisplay_, sameSideLengthNotches = sameSideLengthNotches_;
 
 -(id)initWithPinboard:(Pinboard *)pinboard andPins:(NSMutableArray *)pins {
     if (self = [super init]) {
@@ -42,6 +41,7 @@
         self.colour = ccc3(red, green, blue);
         
         sideLengthLabels = [NSMutableArray array];
+        sameSideLengthNotchesArray = [NSMutableArray array];
     }
     return self;
     
@@ -65,8 +65,8 @@
         Pin * lastPin = [self.pins objectAtIndex:numberOfPins - 1];
         [self addBandPartFrom:lastPin to:firstPin withIndex:numberOfPins - 1];
     }
-    [self setupPropertiesNode];
     [self setPositionAndRotationOfBandParts];
+    [self setupPropertiesNode];
 }
 
 -(void)setupPropertiesNode {
@@ -74,12 +74,15 @@
     self.propertiesNode.zOrder = 1;
     [self.bandNode addChild:self.propertiesNode];
     
+    self.sideDisplay = @"none";
+    
     sideLengthsNode = [CCNode node];
     [self.propertiesNode addChild:sideLengthsNode];
     sideLengthsNode.visible = NO;
-    showSideLengths = NO;
     [self recalculateSideLengths];
-    [self setSideLengths];
+
+    self.sameSideLengthNotches = [NSMutableArray array];
+    [self recalculateSameSideLengths];
     
     angleNode = [CCNode node];
     [self.propertiesNode addChild:angleNode];
@@ -87,7 +90,6 @@
     showAngles = NO;
     angleNode.visible = NO;
     [self recalculateAngles];
-    [self setAngles];
 }
 
 -(void)setPositionAndRotationOfBandParts {
@@ -117,7 +119,7 @@
 }
 
 -(void)processTouch:(CGPoint)touchLocation {
-    BOOL pinSelected = NO;
+    BOOL selected = NO;
     for (int i = 0; i < [self.pins count]; i++) {
         Pin * pin = [self.pins objectAtIndex:i];
         if ([pin.sprite touched:touchLocation]) {
@@ -126,25 +128,29 @@
             } else {
                 [self splitBandPart:0 at:touchLocation];
             }
-            pinSelected = YES;
+            selected = YES;
             [self.pinboard setMovingBand:self];
             break;
         }
     }
-    if (!pinSelected) {
+    if (!selected) {
         int numberOfBandParts = [self.bandParts count];
         for (int i = 0; i < numberOfBandParts; i++) {
             BandPart * bandPart = [self.bandParts objectAtIndex:i];
             if ([bandPart.sprite touched:touchLocation]) {
                 [self splitBandPart:i at:touchLocation];
                 [self.pinboard setMovingBand:self];
+                selected = YES;
                 break;
             }
         }
     }
-    [self setPositionAndRotationOfBandParts];
-    [self setAngles];
-    [self setSideLengths];
+    if (selected) {
+        [self setPositionAndRotationOfBandParts];
+        [self setAngles];
+        [self setSideLengths];
+        [self clearSameSideLengthNotches];
+    }
 }
 
 -(void)splitBandPart:(int)index at:(CGPoint)touchLocation {
@@ -230,6 +236,7 @@
     [self cleanPins];
     [self setAngles];
     [self setSideLengths];
+    [self recalculateSameSideLengths];
 }
 
 -(void)pinBandOnPin:(Pin *)pin {
@@ -325,6 +332,7 @@
         angle.label.position = ccp(0, 10);
         [angle addChild:angle.label];
     }
+    [self setAngles];
 }
 
 -(void)setAngles {
@@ -334,8 +342,8 @@
         Angle * angle = [self.angles objectAtIndex:i];
         BandPart * inPart = [self.bandParts objectAtIndex:[self indexInCorrectRange:i-1 forArray:self.bandParts]];
         BandPart * outPart = [self.bandParts objectAtIndex:i];
-        float inPartAngle = CC_DEGREES_TO_RADIANS(180 + inPart.baseNode.rotation);
-        float outPartAngle = CC_DEGREES_TO_RADIANS(outPart.baseNode.rotation);
+        float inPartAngle = CC_DEGREES_TO_RADIANS(180 + inPart.bandPartNode.rotation);
+        float outPartAngle = CC_DEGREES_TO_RADIANS(outPart.bandPartNode.rotation);
         angle.startAngle = inPartAngle;
         float thisAngle = [self angleInCorrectRange:outPartAngle - inPartAngle];
         angle.anticlockwise = self.anticlockwise;
@@ -377,9 +385,26 @@
     return angle;
 }
 
--(void)showSideLengths {
-    showSideLengths = !showSideLengths;
-    sideLengthsNode.visible = showSideLengths;
+-(void)toggleSideDisplay:(NSString *)sideDisplay {
+    if (![self.sideDisplay isEqual:sideDisplay]) {
+        self.sideDisplay = sideDisplay;
+    } else {
+        self.sideDisplay = @"none";
+    }
+    [self displaySides];
+}
+
+-(void)displaySides {
+    if ([self.sideDisplay isEqual:@"none"]) {
+        sideLengthsNode.visible = NO;
+        [self sameSideLengthNotchesVisible:NO];
+    } else if ([self.sideDisplay isEqual:@"sideLengths"]) {
+        sideLengthsNode.visible = YES;
+        [self sameSideLengthNotchesVisible:NO];
+    } else if ([self.sideDisplay isEqual:@"sameSideLengths"]) {
+        sideLengthsNode.visible = NO;
+        [self sameSideLengthNotchesVisible:YES];
+    }
 }
 
 -(void)recalculateSideLengths {
@@ -395,7 +420,6 @@
         label.position = ccp(labelBackground.contentSize.width * labelBackground.scaleX/2, labelBackground.contentSize.height * labelBackground.scaleY/2);
         [labelBackground addChild:label];
         [sideLengthsNode addChild:labelBackground];
-
     }
     [self setSideLengths];
 }
@@ -411,6 +435,44 @@
         float labelYPosition = (bandPart.fromPin.sprite.position.y + bandPart.toPin.sprite.position.y)/2.0;
         label.parent.position = ccp(labelXPosition, labelYPosition);
         [label setString:lengthString];
+    }
+}
+
+-(void)clearSameSideLengthNotches {
+    for (CCSprite * notch in self.sameSideLengthNotches) {
+        [notch removeFromParentAndCleanup:YES];
+    }
+    [sameSideLengthNotchesArray removeAllObjects];
+}
+
+-(void)recalculateSameSideLengths {
+    NSMutableArray * bandParts = [NSMutableArray arrayWithArray:self.bandParts];
+    int numberOfNotches = 1;
+    while ([bandParts count] > 0) {
+        BandPart * bandPart = [bandParts objectAtIndex:0];
+        NSMutableArray * sameLengthBandParts = [NSMutableArray array];
+        [sameLengthBandParts addObject:bandPart];
+        for (int i = 1; i < [bandParts count]; i++) {
+            BandPart * otherBandPart = [bandParts objectAtIndex:i];
+            if ([self aFloat:[bandPart length] closeTo:[otherBandPart length]]) {
+                [sameLengthBandParts addObject:otherBandPart];
+            }
+        }
+        if ([sameLengthBandParts count] > 1) {
+            for (BandPart * bandPart in sameLengthBandParts) {
+                [bandPart addNotches:numberOfNotches];
+            }
+            numberOfNotches++;
+        }
+        for (BandPart * bandPart in sameLengthBandParts) {
+            [bandParts removeObject:bandPart];
+        }
+    }
+}
+
+-(void)sameSideLengthNotchesVisible:(BOOL)visible {
+    for (CCSprite * notch in self.sameSideLengthNotches) {
+        notch.visible = visible;
     }
 }
 

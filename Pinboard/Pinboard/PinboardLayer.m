@@ -124,7 +124,9 @@
         CCMenuItem * showAnglesButton = [CCMenuItemImage itemWithNormalImage:@"showAnglesButton.png" selectedImage:@"showAnglesButton.png" target:self selector:@selector(showAnglesButtonTapped)];
         CCMenuItem * showSideLengthsButton = [CCMenuItemImage itemWithNormalImage:@"showSideLengthsButton.png" selectedImage:@"showSideLengthsButton.png" target:self selector:@selector(showSideLengthsButtonTapped)];
         showSideLengthsButton.position = ccp(0, -80);
-        CCMenu * bandPropertiesMenu = [CCMenu menuWithItems:showAnglesButton, showSideLengthsButton, nil];
+        CCMenuItem * showSameSideLengthButton = [CCMenuItemImage itemWithNormalImage:@"sameSideLengthButton.png" selectedImage:@"sameSideLengthButton.png" target:self selector:@selector(showSameSideLengthButtonTapped)];
+        showSameSideLengthButton.position = ccp(0, -160);
+        CCMenu * bandPropertiesMenu = [CCMenu menuWithItems:showAnglesButton, showSideLengthsButton, showSameSideLengthButton, nil];
         bandPropertiesMenu.position = ccp(900, 300);
         [self addChild:bandPropertiesMenu];
         
@@ -251,7 +253,11 @@
 }
 
 -(void)showSideLengthsButtonTapped {
-    [pinboard showSideLengths];
+    [pinboard setCurrentBandSideDisplay:@"sideLengths"];
+}
+
+-(void)showSameSideLengthButtonTapped {
+    [pinboard setCurrentBandSideDisplay:@"sameSideLengths"];
 }
 
 -(void)setRegularIndicatorWithRegular:(NSString *)regular {
