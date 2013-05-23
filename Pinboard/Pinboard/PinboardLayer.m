@@ -145,6 +145,7 @@
 }
 
 -(void)setupPinboard {
+    [self clearIndicators];
     [pinboard setPosition:ccp(size.width/2, size.height/2)];
     [pinboard addToNode:self];
     pinboard.layer = self;
@@ -253,13 +254,17 @@
     [pinboard showSideLengths];
 }
 
--(void)setRegularIndicatorWithRegular:(BOOL)regular {
-    NSString * string = regular ? @"Regular" : @"Irregular";
-    [regularIndicatorLabel setString:string];
+-(void)setRegularIndicatorWithRegular:(NSString *)regular {
+    [regularIndicatorLabel setString:regular];
 }
 
 -(void)setShapeIndicatorWith:(NSString *)shapeName {
     [shapeIndicatorLabel setString:shapeName];
+}
+
+-(void)clearIndicators {
+    [regularIndicatorLabel setString:@""];
+    [shapeIndicatorLabel setString:@""];
 }
 
 #pragma mark GameKit delegate

@@ -242,21 +242,26 @@
 }
 
 -(void)removeMovingPin {
-    Pin * fromPin = entryPart.fromPin;
-    Pin * toPin = exitPart.toPin;
-    
-    int index = [self.bandParts indexOfObject:entryPart];
-    [self addBandPartFrom:fromPin to:toPin withIndex:index];
-    
-    [self.bandParts removeObject:entryPart];
-    [self.bandParts removeObject:exitPart];
-    [self.pins removeObject:movingPin];
-    [entryPart.sprite removeFromParentAndCleanup:YES];
-    [exitPart.sprite removeFromParentAndCleanup:YES];
+    int index = [self.pins indexOfObject:movingPin];
+    [self removePin:index];
     [movingPin.sprite removeFromParentAndCleanup:YES];
-    
     [self recalculateAngles];
     [self recalculateSideLengths];
+}
+
+-(void)removePin:(int)pinIndex {
+    Pin * pin = [self.pins objectAtIndex:pinIndex];
+    BandPart * inPart = [self.bandParts objectAtIndex:[self indexInCorrectRange:pinIndex - 1 forArray:self.bandParts]];
+    BandPart * outPart = [self.bandParts objectAtIndex:pinIndex];
+    Pin * fromPin = inPart.fromPin;
+    Pin * toPin = outPart.toPin;
+    
+    [self addBandPartFrom:fromPin to:toPin withIndex:[self indexInCorrectRange:pinIndex - 1 forArray:self.bandParts]];
+    [self.bandParts removeObject:inPart];
+    [self.bandParts removeObject:outPart];
+    [self.pins removeObject:pin];
+    [inPart.sprite removeFromParentAndCleanup:YES];
+    [outPart.sprite removeFromParentAndCleanup:YES];
 }
 
 -(void)cleanPins {
@@ -274,21 +279,30 @@
         }
         [self.pins removeObjectsAtIndexes:repeatPinsIndexes];
         [self.bandParts removeObjectsAtIndexes:repeatPinsIndexes];
+        
+        int indexOfStraightThroughPin = [self indexOfStraightThroughPin];
+        while (indexOfStraightThroughPin != -1) {
+            [self removePin:indexOfStraightThroughPin];
+            [self setPositionAndRotationOfBandParts];
+            indexOfStraightThroughPin = [self indexOfStraightThroughPin];
+        }
+        [self setPositionAndRotationOfBandParts];
+        [self recalculateAngles];
+        [self recalculateSideLengths];
     }
-    
-    /*
-    numberOfPins = [self.pins count];
-    NSMutableIndexSet * straightThroughPinsIndexes = [NSMutableIndexSet indexSet];
+}
+
+-(int)indexOfStraightThroughPin {
+    int numberOfPins = [self.pins count];
+    int indexToReturn = -1;
     for (int i = 0; i < numberOfPins; i++) {
         BandPart * thisPart = [self.bandParts objectAtIndex:i];
-        BandPart * nextPart = [self.bandParts objectAtIndex:(i + 1)%numberOfPins];
-        if (thisPart.sprite.parent.rotation == nextPart.sprite.parent.rotation) {
-            [straightThroughPinsIndexes addIndex:(i+1)%numberOfPins];
+        BandPart * nextPart = [self.bandParts objectAtIndex:(i+1)%numberOfPins];
+        if ([self aFloat:thisPart.sprite.parent.rotation closeTo:nextPart.sprite.parent.rotation]) {
+            indexToReturn = (i+1)%numberOfPins;
         }
     }
-    [self.pins removeObjectsAtIndexes:repeatPinsIndexes];
-    [self setPositionAndRotationOfBandParts];
-     */
+    return indexToReturn;
 }
 
 -(void)showAngles {
@@ -400,25 +414,30 @@
     }
 }
 
--(BOOL)regular {
-    BOOL regular = YES;
-    BandPart * firstBandPart = [self.bandParts objectAtIndex:0];
-    float sideLength = [firstBandPart length];
-    for (BandPart * bandPart in self.bandParts) {
-        float thisLength = [bandPart length];
-        if (ABS(thisLength - sideLength) > 0.0001) {
-            regular = NO;
-            break;
-        }
-    }
-    if (regular) {
-        Angle * angle = [self.angles objectAtIndex:0];
-        float angleValue = angle.throughAngle;
-        for (Angle * angle in self.angles) {
-            float thisAngleValue = angle.throughAngle;
-            if (ABS(thisAngleValue - angleValue) > 0.0001) {
-                regular = NO;
+-(NSString *)regular {
+    NSString * regular;
+    if ([self.bandParts count] < 3) {
+        regular = @"";
+    } else {
+        regular = @"Regular";
+        BandPart * firstBandPart = [self.bandParts objectAtIndex:0];
+        float sideLength = [firstBandPart length];
+        for (BandPart * bandPart in self.bandParts) {
+            float thisLength = [bandPart length];
+            if (ABS(thisLength - sideLength) > 0.0001) {
+                regular = @"Irregular";
                 break;
+            }
+        }
+        if (regular) {
+            Angle * angle = [self.angles objectAtIndex:0];
+            float angleValue = angle.throughAngle;
+            for (Angle * angle in self.angles) {
+                float thisAngleValue = angle.throughAngle;
+                if (ABS(thisAngleValue - angleValue) > 0.0001) {
+                    regular = @"Irregular";
+                    break;
+                }
             }
         }
     }

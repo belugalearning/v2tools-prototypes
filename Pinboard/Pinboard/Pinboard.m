@@ -116,7 +116,8 @@
     [self.bands removeObject:band];
     [self.bands insertObject:band atIndex:0];
     [self setBandsZIndexToPriorityOrder];
-    
+    [self setPropertyIndicatorsFor:band];
+    /*
     for (Band * otherBand in self.bands) {
         if (otherBand != band) {
             for (Angle * angle in otherBand.angles) {
@@ -128,6 +129,7 @@
             }
         }
     }
+     */
 }
 
 -(void)setBandsZIndexToPriorityOrder {
@@ -149,7 +151,7 @@
 }
 
 -(void)setPropertyIndicatorsFor:(Band *)band {
-    BOOL regular = [band regular];
+    NSString * regular = [band regular];
     [self.layer setRegularIndicatorWithRegular:regular];
     NSString * shapeName = [band shape];
     [self.layer setShapeIndicatorWith:shapeName];

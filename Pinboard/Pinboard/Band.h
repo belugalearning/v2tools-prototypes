@@ -37,7 +37,7 @@
 -(void)removeMovingPin;
 -(void)showAngles;
 -(void)showSideLengths;
--(BOOL)regular;
+-(NSString *)regular;
 -(NSString *)shape;
 
 @end
