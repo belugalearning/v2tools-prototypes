@@ -32,6 +32,6 @@
 -(float)length;
 -(BOOL)parallelTo:(BandPart *)otherPart;
 -(void)addNotches:(int)numberOfNotches;
--(void)addArrows:(int)numberOfArrows;
+-(void)addArrows:(int)numberOfArrows reverse:(BOOL)reverse;
 
 @end

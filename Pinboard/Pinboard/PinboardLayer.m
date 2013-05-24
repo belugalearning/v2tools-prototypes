@@ -124,18 +124,22 @@
         
         
         CCMenuItem * showAnglesButton = [CCMenuItemImage itemWithNormalImage:@"showAnglesButton.png" selectedImage:@"showAnglesButton.png" target:self selector:@selector(showAnglesButtonTapped)];
+        showAnglesButton.position = ccp(-200, 50);
+        
+        CCMenuItem * showSameAngleButton = [CCMenuItemImage itemWithNormalImage:@"sameAngleButton.png" selectedImage:@"sameAngleButton.png" target:self selector:@selector(showSameAngleButtonTapped)];
+        showSameAngleButton.position = ccp(10, 50);
         
         CCMenuItem * showSideLengthsButton = [CCMenuItemImage itemWithNormalImage:@"showSideLengthsButton.png" selectedImage:@"showSideLengthsButton.png" target:self selector:@selector(showSideLengthsButtonTapped)];
-        showSideLengthsButton.position = ccp(0, -80);
+        showSideLengthsButton.position = ccp(-250, -30);
         
         CCMenuItem * showSameSideLengthButton = [CCMenuItemImage itemWithNormalImage:@"sameSideLengthButton.png" selectedImage:@"sameSideLengthButton.png" target:self selector:@selector(showSameSideLengthButtonTapped)];
-        showSameSideLengthButton.position = ccp(0, -160);
+        showSameSideLengthButton.position = ccp(-45, -30);
         
         CCMenuItem * showParallelSidesButton = [CCMenuItemImage itemWithNormalImage:@"showParallelSidesButton.png" selectedImage:@"showParallelSidesButton.png" target:self selector:@selector(showParallelSidesButtonTapped)];
-        showParallelSidesButton.position = ccp(0, -240);
+        showParallelSidesButton.position = ccp(160, -30);
         
-        CCMenu * bandPropertiesMenu = [CCMenu menuWithItems:showAnglesButton, showSideLengthsButton, showSameSideLengthButton, showParallelSidesButton, nil];
-        bandPropertiesMenu.position = ccp(900, 300);
+        CCMenu * bandPropertiesMenu = [CCMenu menuWithItems:showAnglesButton, showSameAngleButton, showSideLengthsButton, showSameSideLengthButton, showParallelSidesButton, nil];
+        bandPropertiesMenu.position = ccp(600, 100);
         [self addChild:bandPropertiesMenu];
         
         /*

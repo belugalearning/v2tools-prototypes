@@ -154,6 +154,7 @@
 		F387D027174A770800E20950 /* Angle.m in Sources */ = {isa = PBXBuildFile; fileRef = F387D026174A770800E20950 /* Angle.m */; };
 		F387ED6E174F699D00EFC9AB /* showParallelSidesButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F387ED6D174F699D00EFC9AB /* showParallelSidesButton.png */; };
 		F387ED70174F6F3F00EFC9AB /* parallelSideArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = F387ED6F174F6F3F00EFC9AB /* parallelSideArrow.png */; };
+		F387ED72174F80D200EFC9AB /* sameAngleButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F387ED71174F80D200EFC9AB /* sameAngleButton.png */; };
 		F389D0A5174CDA66003ED956 /* showSideLengthsButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F389D0A4174CDA66003ED956 /* showSideLengthsButton.png */; };
 		F389D0A7174CF2B8003ED956 /* sideLengthBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = F389D0A6174CF2B8003ED956 /* sideLengthBackground.png */; };
 		F389D0A9174CF8DE003ED956 /* propertyBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = F389D0A8174CF8DE003ED956 /* propertyBackground.png */; };
@@ -457,6 +458,7 @@
 		F387D026174A770800E20950 /* Angle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Angle.m; sourceTree = "<group>"; };
 		F387ED6D174F699D00EFC9AB /* showParallelSidesButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = showParallelSidesButton.png; path = ../../../PinboardResources/showParallelSidesButton.png; sourceTree = "<group>"; };
 		F387ED6F174F6F3F00EFC9AB /* parallelSideArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = parallelSideArrow.png; path = ../../../PinboardResources/parallelSideArrow.png; sourceTree = "<group>"; };
+		F387ED71174F80D200EFC9AB /* sameAngleButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sameAngleButton.png; path = ../../../PinboardResources/sameAngleButton.png; sourceTree = "<group>"; };
 		F389D0A4174CDA66003ED956 /* showSideLengthsButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = showSideLengthsButton.png; path = ../../../PinboardResources/showSideLengthsButton.png; sourceTree = "<group>"; };
 		F389D0A6174CF2B8003ED956 /* sideLengthBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sideLengthBackground.png; path = ../../../PinboardResources/sideLengthBackground.png; sourceTree = "<group>"; };
 		F389D0A8174CF8DE003ED956 /* propertyBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = propertyBackground.png; path = ../../../PinboardResources/propertyBackground.png; sourceTree = "<group>"; };
@@ -565,6 +567,7 @@
 				F387ED6F174F6F3F00EFC9AB /* parallelSideArrow.png */,
 				F389D0A8174CF8DE003ED956 /* propertyBackground.png */,
 				F38772E4173BD1050087F831 /* Default.png */,
+				F387ED71174F80D200EFC9AB /* sameAngleButton.png */,
 				F3875C81174651BD00A176B2 /* squareLatticeButton.png */,
 				F3875C82174651BD00A176B2 /* triangularLatticeButton.png */,
 				F389D0A6174CF2B8003ED956 /* sideLengthBackground.png */,
@@ -1025,6 +1028,7 @@
 				F387C034174E797E00AE6F67 /* pinboardBackground.png in Resources */,
 				F387ED6E174F699D00EFC9AB /* showParallelSidesButton.png in Resources */,
 				F387ED70174F6F3F00EFC9AB /* parallelSideArrow.png in Resources */,
+				F387ED72174F80D200EFC9AB /* sameAngleButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -87,21 +87,14 @@
 }
 
 -(BOOL)parallelTo:(BandPart *)otherPart {
-    BOOL parallel;
-    if (self.fromPin == self.toPin || otherPart.fromPin == otherPart.toPin) {
-        parallel = NO;
-    } else {
-        float selfRun = self.toPin.sprite.position.x - self.fromPin.sprite.position.x;
-        float selfRise = self.toPin.sprite.position.y - self.fromPin.sprite.position.y;
-        float otherPartRun = otherPart.toPin.sprite.position.x - otherPart.fromPin.sprite.position.x;
-        float otherPartRise = otherPart.toPin.sprite.position.y - otherPart.fromPin.sprite.position.y;
-        float leftHandSide = selfRise * otherPartRun;
-        float rightHandSide = otherPartRise * selfRun;
-        if (ABS(leftHandSide - rightHandSide) < 0.001) {
-            parallel = YES;
-        } else {
-            parallel = NO;
-        }
+    BOOL parallel = NO;
+    float firstRotation = self.bandPartNode.rotation;
+    float secondRotation = otherPart.bandPartNode.rotation;
+    if (ABS(firstRotation - secondRotation) < 0.001) {
+        parallel = YES;
+    }
+    if (ABS(ABS(firstRotation - secondRotation) - 180) < 0.001) {
+        parallel = YES;
     }
     return parallel;
 }
@@ -121,12 +114,12 @@
     }
 }
 
--(void)addArrows:(int)numberOfArrows {
+-(void)addArrows:(int)numberOfArrows reverse:(BOOL)reverse {
     numberOfIndicators = numberOfArrows;
     float spacing = 8;
     for (int i = 1; i <= numberOfArrows; i++) {
         CCSprite * parallelSideArrow = [CCSprite spriteWithFile:@"parallelSideArrow.png"];
-        parallelSideArrow.rotation = 90;
+        parallelSideArrow.rotation = reverse ? -90 : 90;
         parallelSideArrow.scale = 0.5;
         float yPosition = [self indicatorYPosition:i withSpacing:spacing];
         parallelSideArrow.position = ccp(0, yPosition);

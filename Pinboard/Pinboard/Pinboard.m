@@ -182,21 +182,32 @@
     int numberOfArrows = 1;
     while ([bandParts count] > 0) {
         BandPart * bandPart = [bandParts objectAtIndex:0];
-        NSMutableArray * parallelBandParts = [NSMutableArray array];
-        [parallelBandParts addObject:bandPart];
+        NSMutableArray * parallelBandPartsNormalOrientation = [NSMutableArray array];
+        NSMutableArray * parallelBandPartsReverseOrientation = [NSMutableArray array];
+        [parallelBandPartsNormalOrientation addObject:bandPart];
         for (int i = 1; i < [bandParts count]; i++) {
             BandPart * otherBandPart = [bandParts objectAtIndex:i];
             if ([bandPart parallelTo:otherBandPart]) {
-                [parallelBandParts addObject:otherBandPart];
+                if (ABS(bandPart.bandPartNode.rotation - otherBandPart.bandPartNode.rotation) < 0.001) {
+                    [parallelBandPartsNormalOrientation addObject:otherBandPart];
+                } else {
+                    [parallelBandPartsReverseOrientation addObject:otherBandPart];
+                }
             }
         }
-        if ([parallelBandParts count] > 1) {
-            for (BandPart * bandPart in parallelBandParts) {
-                [bandPart addArrows:numberOfArrows];
+        if ([parallelBandPartsNormalOrientation count] + [parallelBandPartsReverseOrientation count] > 1) {
+            for (BandPart * bandPart in parallelBandPartsNormalOrientation) {
+                [bandPart addArrows:numberOfArrows reverse:NO];
+            }
+            for (BandPart * bandPart in parallelBandPartsReverseOrientation) {
+                [bandPart addArrows:numberOfArrows reverse:YES];
             }
             numberOfArrows++;
         }
-        for (BandPart * bandPart in parallelBandParts) {
+        for (BandPart * bandPart in parallelBandPartsNormalOrientation) {
+            [bandParts removeObject:bandPart];
+        }
+        for (BandPart * bandPart in parallelBandPartsReverseOrientation) {
             [bandParts removeObject:bandPart];
         }
     }
@@ -217,6 +228,16 @@
         }
     }
     return bandParts;
+}
+
+-(int)signOfFloat:(float)number {
+    int sign;
+    if (number != 0) {
+        sign = number > 0 ? 1 : -1;
+    } else {
+        sign = 0;
+    }
+    return sign;
 }
 
 @end
