@@ -28,6 +28,7 @@
 @property (readwrite) NSMutableArray * sideLengths;
 @property (readwrite) NSString * sideDisplay;
 @property (readwrite) NSMutableArray * sameSideLengthNotches;
+@property (readwrite) NSMutableArray * parallelSideArrows;
 
 -(id)initWithPinboard:(Pinboard *)pinboard andPins:(NSMutableArray *)pins;
 +(id)bandWithPinboard:(Pinboard *)pinboard andPins:(NSMutableArray *)pins;
@@ -43,5 +44,6 @@
 -(void)displaySides;
 -(void)toggleSideDisplay:(NSString *)sideDisplay;
 -(void)clearSameSideLengthNotches;
+-(void)clearParallelSideArrows;
 
 @end

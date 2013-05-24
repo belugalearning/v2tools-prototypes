@@ -90,6 +90,7 @@
         [movingBand processEnd:touchLocation];
         [self setPropertyIndicatorsFor:movingBand];
         [self recalculateSameSideLengths];
+        [self recalculateParallelSides];
     }
     movingBand = nil;
 }
@@ -119,6 +120,7 @@
     [self.bands insertObject:band atIndex:0];
     [self setBandsZIndexToPriorityOrder];
     [self setPropertyIndicatorsFor:band];
+    [self.layer.border setColor:band.colour];
 }
 
 -(void)setBandsZIndexToPriorityOrder {
@@ -151,18 +153,7 @@
 }
 
 -(void)recalculateSameSideLengths {
-    NSMutableArray * allBands = self.bands;
-    NSMutableArray * bandParts = [NSMutableArray array];
-    for (Band * band in allBands) {
-        if ([band.sideDisplay isEqualToString:@"sameSideLengths"]) {
-            [band clearSameSideLengthNotches];
-            if ([band.pins count] == 2) {
-                [bandParts addObject:[band.bandParts objectAtIndex:0]];
-            } else {
-                [bandParts addObjectsFromArray:band.bandParts];
-            }
-        }
-    }
+    NSMutableArray * bandParts = [self allBandPartsWithSideDisplay:@"sameSideLengths"];
     int numberOfNotches = 1;
     while ([bandParts count] > 0) {
         BandPart * bandPart = [bandParts objectAtIndex:0];
@@ -184,6 +175,48 @@
             [bandParts removeObject:bandPart];
         }
     }
+}
+
+-(void)recalculateParallelSides {
+    NSMutableArray * bandParts = [self allBandPartsWithSideDisplay:@"parallelSides"];
+    int numberOfArrows = 1;
+    while ([bandParts count] > 0) {
+        BandPart * bandPart = [bandParts objectAtIndex:0];
+        NSMutableArray * parallelBandParts = [NSMutableArray array];
+        [parallelBandParts addObject:bandPart];
+        for (int i = 1; i < [bandParts count]; i++) {
+            BandPart * otherBandPart = [bandParts objectAtIndex:i];
+            if ([bandPart parallelTo:otherBandPart]) {
+                [parallelBandParts addObject:otherBandPart];
+            }
+        }
+        if ([parallelBandParts count] > 1) {
+            for (BandPart * bandPart in parallelBandParts) {
+                [bandPart addArrows:numberOfArrows];
+            }
+            numberOfArrows++;
+        }
+        for (BandPart * bandPart in parallelBandParts) {
+            [bandParts removeObject:bandPart];
+        }
+    }
+}
+
+-(NSMutableArray *)allBandPartsWithSideDisplay:(NSString *)sideDisplay {
+    NSMutableArray * allBands = self.bands;
+    NSMutableArray * bandParts = [NSMutableArray array];
+    for (Band * band in allBands) {
+        if ([band.sideDisplay isEqualToString:sideDisplay]) {
+            [band clearSameSideLengthNotches];
+            [band clearParallelSideArrows];
+            if ([band.pins count] == 2) {
+                [bandParts addObject:[band.bandParts objectAtIndex:0]];
+            } else {
+                [bandParts addObjectsFromArray:band.bandParts];
+            }
+        }
+    }
+    return bandParts;
 }
 
 @end

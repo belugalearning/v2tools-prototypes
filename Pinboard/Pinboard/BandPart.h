@@ -21,6 +21,8 @@
 @property (readwrite) Pin * toPin;
 @property (readwrite) Band * band;
 @property (readwrite) CCNode * bandPartNode;
+@property (readwrite) CCNode * notchNode;
+@property (readwrite) CCNode * arrowNode;
 
 -(id)initWithBand:(Band *)band fromPin:(Pin *)fromPin toPin:(Pin *)toPin;
 -(void)setToBeFromPin:(Pin *)fromPin toPin:(Pin *)toPin;
@@ -30,5 +32,6 @@
 -(float)length;
 -(BOOL)parallelTo:(BandPart *)otherPart;
 -(void)addNotches:(int)numberOfNotches;
+-(void)addArrows:(int)numberOfArrows;
 
 @end

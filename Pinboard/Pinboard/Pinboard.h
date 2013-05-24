@@ -42,5 +42,6 @@ typedef enum {
 -(void)setCurrentBandSideDisplay:(NSString *)sideDisplay;
 -(float)unitDistance;
 -(void)recalculateSameSideLengths;
+-(void)recalculateParallelSides;
 
 @end

@@ -33,6 +33,8 @@
     CCLabelTTF * shapeIndicatorLabel;
 }
 
+@synthesize border = border_;
+
 // Helper class method that creates a Scene with the HelloWorldLayer as the only child.
 +(CCScene *) scene
 {
@@ -122,11 +124,17 @@
         
         
         CCMenuItem * showAnglesButton = [CCMenuItemImage itemWithNormalImage:@"showAnglesButton.png" selectedImage:@"showAnglesButton.png" target:self selector:@selector(showAnglesButtonTapped)];
+        
         CCMenuItem * showSideLengthsButton = [CCMenuItemImage itemWithNormalImage:@"showSideLengthsButton.png" selectedImage:@"showSideLengthsButton.png" target:self selector:@selector(showSideLengthsButtonTapped)];
         showSideLengthsButton.position = ccp(0, -80);
+        
         CCMenuItem * showSameSideLengthButton = [CCMenuItemImage itemWithNormalImage:@"sameSideLengthButton.png" selectedImage:@"sameSideLengthButton.png" target:self selector:@selector(showSameSideLengthButtonTapped)];
         showSameSideLengthButton.position = ccp(0, -160);
-        CCMenu * bandPropertiesMenu = [CCMenu menuWithItems:showAnglesButton, showSideLengthsButton, showSameSideLengthButton, nil];
+        
+        CCMenuItem * showParallelSidesButton = [CCMenuItemImage itemWithNormalImage:@"showParallelSidesButton.png" selectedImage:@"showParallelSidesButton.png" target:self selector:@selector(showParallelSidesButtonTapped)];
+        showParallelSidesButton.position = ccp(0, -240);
+        
+        CCMenu * bandPropertiesMenu = [CCMenu menuWithItems:showAnglesButton, showSideLengthsButton, showSameSideLengthButton, showParallelSidesButton, nil];
         bandPropertiesMenu.position = ccp(900, 300);
         [self addChild:bandPropertiesMenu];
         
@@ -147,6 +155,11 @@
 }
 
 -(void)setupPinboard {
+    self.border = [CCSprite spriteWithFile:@"pinboardBackground.png"];
+    self.border.scaleY = 3.2;
+    self.border.scaleX = 2.6;
+    self.border.position = ccp(size.width/2, size.height/2);
+    [self addChild:self.border];
     [self clearIndicators];
     [pinboard setPosition:ccp(size.width/2, size.height/2)];
     [pinboard addToNode:self];
@@ -156,10 +169,8 @@
 -(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint touchLocation = [self convertTouchToNodeSpace:touch];
     [pinboard processTouch:touchLocation];
-    
     return YES;
 }
-
 
 -(void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint touchLocation = [self convertTouchToNodeSpace:touch];
@@ -255,11 +266,19 @@
 -(void)showSideLengthsButtonTapped {
     [pinboard setCurrentBandSideDisplay:@"sideLengths"];
     [pinboard recalculateSameSideLengths];
+    [pinboard recalculateParallelSides];
 }
 
 -(void)showSameSideLengthButtonTapped {
     [pinboard setCurrentBandSideDisplay:@"sameSideLengths"];
     [pinboard recalculateSameSideLengths];
+    [pinboard recalculateParallelSides];
+}
+
+-(void)showParallelSidesButtonTapped {
+    [pinboard setCurrentBandSideDisplay:@"parallelSides"];
+    [pinboard recalculateSameSideLengths];
+    [pinboard recalculateParallelSides];
 }
 
 -(void)setRegularIndicatorWithRegular:(NSString *)regular {

@@ -28,6 +28,8 @@
     Pin * movingPin;
 }
 
+@property (readwrite) CCSprite * border;
+
 -(void)setRegularIndicatorWithRegular:(NSString *)regular;
 -(void)setShapeIndicatorWith:(NSString *)shapeName;
 

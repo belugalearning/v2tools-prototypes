@@ -21,10 +21,9 @@
     CCNode * angleNode;
     CCNode * sideLengthsNode;
     NSMutableArray * sideLengthLabels;
-    NSMutableArray * sameSideLengthNotchesArray;
 }
 
-@synthesize pins = pins_, bandParts = bandParts_, colour = colour_, bandNode = bandNode_, angles = angles_, anticlockwise = anticlockwise_, propertiesNode = propertiesNode_, sideDisplay = sideDisplay_, sameSideLengthNotches = sameSideLengthNotches_;
+@synthesize pins = pins_, bandParts = bandParts_, colour = colour_, bandNode = bandNode_, angles = angles_, anticlockwise = anticlockwise_, propertiesNode = propertiesNode_, sideDisplay = sideDisplay_, sameSideLengthNotches = sameSideLengthNotches_, parallelSideArrows = parallelSideArrows_;
 
 -(id)initWithPinboard:(Pinboard *)pinboard andPins:(NSMutableArray *)pins {
     if (self = [super init]) {
@@ -41,7 +40,6 @@
         self.colour = ccc3(red, green, blue);
         
         sideLengthLabels = [NSMutableArray array];
-        sameSideLengthNotchesArray = [NSMutableArray array];
     }
     return self;
     
@@ -83,6 +81,9 @@
 
     self.sameSideLengthNotches = [NSMutableArray array];
     [self.pinboard recalculateSameSideLengths];
+    
+    self.parallelSideArrows = [NSMutableArray array];
+    [self.pinboard recalculateParallelSides];
     
     angleNode = [CCNode node];
     [self.propertiesNode addChild:angleNode];
@@ -150,6 +151,7 @@
         [self setAngles];
         [self setSideLengths];
         [self clearSameSideLengthNotches];
+        [self clearParallelSideArrows];
     }
 }
 
@@ -394,15 +396,15 @@
 }
 
 -(void)displaySides {
-    if ([self.sideDisplay isEqual:@"none"]) {
-        sideLengthsNode.visible = NO;
-        [self sameSideLengthNotchesVisible:NO];
-    } else if ([self.sideDisplay isEqual:@"sideLengths"]) {
+    sideLengthsNode.visible = NO;
+    [self sameSideLengthNotchesVisible:NO];
+    [self parallelSideArrowsVisible:NO];
+    if ([self.sideDisplay isEqualToString:@"sideLengths"]) {
         sideLengthsNode.visible = YES;
-        [self sameSideLengthNotchesVisible:NO];
-    } else if ([self.sideDisplay isEqual:@"sameSideLengths"]) {
-        sideLengthsNode.visible = NO;
+    } else if ([self.sideDisplay isEqualToString:@"sameSideLengths"]) {
         [self sameSideLengthNotchesVisible:YES];
+    } else if ([self.sideDisplay isEqualToString:@"parallelSides"]) {
+        [self parallelSideArrowsVisible:YES];
     }
 }
 
@@ -441,45 +443,25 @@
     for (CCSprite * notch in self.sameSideLengthNotches) {
         [notch removeFromParentAndCleanup:YES];
     }
-    [sameSideLengthNotchesArray removeAllObjects];
+    [self.sameSideLengthNotches removeAllObjects];
 }
 
-/*
--(void)recalculateSameSideLengths {
-    NSMutableArray * allBands = self.pinboard.bands;
-    NSMutableArray * bandParts = [NSMutableArray array];
-    for (Band * band in allBands) {
-        if ([band.sideDisplay isEqualToString:@"sameSideLengths"]) {
-            [band clearSameSideLengthNotches];
-            [bandParts addObjectsFromArray:band.bandParts];
-        }
-    }
-    int numberOfNotches = 1;
-    while ([bandParts count] > 0) {
-        BandPart * bandPart = [bandParts objectAtIndex:0];
-        NSMutableArray * sameLengthBandParts = [NSMutableArray array];
-        [sameLengthBandParts addObject:bandPart];
-        for (int i = 1; i < [bandParts count]; i++) {
-            BandPart * otherBandPart = [bandParts objectAtIndex:i];
-            if ([self aFloat:[bandPart length] closeTo:[otherBandPart length]]) {
-                [sameLengthBandParts addObject:otherBandPart];
-            }
-        }
-        if ([sameLengthBandParts count] > 1) {
-            for (BandPart * bandPart in sameLengthBandParts) {
-                [bandPart addNotches:numberOfNotches];
-            }
-            numberOfNotches++;
-        }
-        for (BandPart * bandPart in sameLengthBandParts) {
-            [bandParts removeObject:bandPart];
-        }
+-(void)sameSideLengthNotchesVisible:(BOOL)visible {
+    for (BandPart * bandPart in self.bandParts) {
+        bandPart.notchNode.visible = visible;
     }
 }
-*/
--(void)sameSideLengthNotchesVisible:(BOOL)visible {
-    for (CCSprite * notch in self.sameSideLengthNotches) {
-        notch.visible = visible;
+
+-(void)clearParallelSideArrows {
+    for (CCSprite * arrow in self.parallelSideArrows) {
+        [arrow removeFromParentAndCleanup:YES];
+    }
+    [self.parallelSideArrows removeAllObjects];
+}
+
+-(void)parallelSideArrowsVisible:(BOOL)visible {
+    for (BandPart * bandPart in self.bandParts) {
+        bandPart.arrowNode.visible = visible;
     }
 }
 
