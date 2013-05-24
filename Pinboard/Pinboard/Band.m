@@ -17,13 +17,12 @@
     Pin * movingPin;
     BandPart * entryPart;
     BandPart * exitPart;
-    BOOL showAngles;
     CCNode * angleNode;
     CCNode * sideLengthsNode;
     NSMutableArray * sideLengthLabels;
 }
 
-@synthesize pins = pins_, bandParts = bandParts_, colour = colour_, bandNode = bandNode_, angles = angles_, anticlockwise = anticlockwise_, propertiesNode = propertiesNode_, sideDisplay = sideDisplay_, sameSideLengthNotches = sameSideLengthNotches_, parallelSideArrows = parallelSideArrows_;
+@synthesize pins = pins_, bandParts = bandParts_, colour = colour_, bandNode = bandNode_, angles = angles_, anticlockwise = anticlockwise_, propertiesNode = propertiesNode_, sideDisplay = sideDisplay_, angleDisplay = angleDisplay_, sameSideLengthNotches = sameSideLengthNotches_, parallelSideArrows = parallelSideArrows_;
 
 -(id)initWithPinboard:(Pinboard *)pinboard andPins:(NSMutableArray *)pins {
     if (self = [super init]) {
@@ -82,13 +81,14 @@
     self.sameSideLengthNotches = [NSMutableArray array];
     [self.pinboard recalculateSameSideLengths];
     
+    self.angleDisplay = @"none";
+    
     self.parallelSideArrows = [NSMutableArray array];
     [self.pinboard recalculateParallelSides];
     
     angleNode = [CCNode node];
     [self.propertiesNode addChild:angleNode];
     self.angles = [NSMutableArray array];
-    showAngles = NO;
     angleNode.visible = NO;
     [self recalculateAngles];
 }
@@ -156,10 +156,7 @@
 }
 
 -(void)splitBandPart:(int)index at:(CGPoint)touchLocation {
-    
-    
     BandPart * bandPart = [self.bandParts objectAtIndex:index];
-    
     movingPin = [Pin pin];
     CGPoint pinPosition = [self.bandNode convertToNodeSpace:touchLocation];
     movingPin.sprite.position = pinPosition;
@@ -174,14 +171,12 @@
         entryPart = [self.bandParts objectAtIndex:index];
         [self addBandPartFrom:movingPin to:nextPin withIndex:0];
         exitPart = [self.bandParts objectAtIndex:0];
-
     } else {
         [self addBandPartFrom:movingPin to:nextPin withIndex:index];
         [self addBandPartFrom:previousPin to:movingPin withIndex:index];
          int numberOfBandParts = [self.bandParts count];
         entryPart = [self.bandParts objectAtIndex:index];
         exitPart = [self.bandParts objectAtIndex:(index + 1)%numberOfBandParts];
-
     }
    
     
@@ -207,6 +202,7 @@
     exitPart = [self.bandParts objectAtIndex:index];
     [entryPart setToBeFromPin:entryPart.fromPin toPin:movingPin];
     [exitPart setToBeFromPin:movingPin toPin:exitPart.toPin];
+    [self recalculateAngles];
 }
 
 -(void)setEntryAndExitPartsForPin:(Pin *)pin {
@@ -313,23 +309,20 @@
     return indexToReturn;
 }
 
--(void)showAngles {
-    showAngles = !showAngles;
-    angleNode.visible = showAngles;
-}
-
 -(void)recalculateAngles {
     int numberOfPins = [self.pins count];
     [self.angles removeAllObjects];
     [angleNode removeAllChildrenWithCleanup:YES];
     for (int i = 0; i < numberOfPins; i++) {
         Angle * angle = [Angle new];
+        angle.displaySameAngles = [self.angleDisplay isEqualToString:@"sameAngles"];
         [self.angles addObject:angle];
         Pin * pin = [self.pins objectAtIndex:i];
         angle.position = pin.sprite.position;
         [angle setColourRed:self.colour.r green:self.colour.g blue:self.colour.b];
         [angleNode addChild:angle];
         angle.label = [CCLabelTTF labelWithString:@"" fontName:@"Arial" fontSize:12];
+        angle.label.visible = !angle.displaySameAngles;
         angle.label.position = ccp(0, 10);
         [angle addChild:angle.label];
     }
@@ -386,6 +379,15 @@
     return angle;
 }
 
+-(void)toggleAngleDisplay:(NSString *)angleDisplay {
+    if (![self.angleDisplay isEqualToString:angleDisplay]) {
+        self.angleDisplay = angleDisplay;
+    } else {
+        self.angleDisplay = @"none";
+    }
+    [self displayAngles];
+}
+
 -(void)toggleSideDisplay:(NSString *)sideDisplay {
     if (![self.sideDisplay isEqual:sideDisplay]) {
         self.sideDisplay = sideDisplay;
@@ -405,6 +407,22 @@
         [self sameSideLengthNotchesVisible:YES];
     } else if ([self.sideDisplay isEqualToString:@"parallelSides"]) {
         [self parallelSideArrowsVisible:YES];
+    }
+}
+
+-(void)displayAngles {
+    if ([self.angleDisplay isEqualToString:@"none"]) {
+        angleNode.visible = NO;
+    } else if ([self.angleDisplay isEqualToString:@"angles"]) {
+        for (Angle * angle in self.angles) {
+            angle.displaySameAngles = NO;
+        }
+        angleNode.visible = YES;
+    } else if ([self.angleDisplay isEqualToString:@"sameAngles"]) {
+        for (Angle * angle in self.angles) {
+            angle.displaySameAngles = YES;
+        }
+        angleNode.visible = YES;
     }
 }
 

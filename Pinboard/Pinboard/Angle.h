@@ -17,7 +17,10 @@
 @property (readwrite) float throughAngle;
 @property (readwrite) BOOL anticlockwise;
 @property (readwrite) CCLabelTTF * label;
+@property (readwrite) BOOL displaySameAngles;
+@property (readwrite) int numberOfArcs;
 
 -(void)setColourRed:(float)setRed green:(float)setGreen blue:(float)setBlue;
+-(void)setToDrawArcs:(int)numberOfArcs;
 
 @end

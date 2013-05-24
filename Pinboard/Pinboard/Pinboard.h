@@ -38,9 +38,10 @@ typedef enum {
 -(void)processEnd:(CGPoint)touchLocation;
 -(void)setMovingBand:(Band *)band;
 -(Band *)newBand;
--(void)showAngles;
+-(void)setCurrentBandAngleDisplay:(NSString *)angleDisplay;
 -(void)setCurrentBandSideDisplay:(NSString *)sideDisplay;
 -(float)unitDistance;
+-(void)recalculateSameAngles;
 -(void)recalculateSameSideLengths;
 -(void)recalculateParallelSides;
 

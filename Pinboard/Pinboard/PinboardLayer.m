@@ -126,7 +126,7 @@
         CCMenuItem * showAnglesButton = [CCMenuItemImage itemWithNormalImage:@"showAnglesButton.png" selectedImage:@"showAnglesButton.png" target:self selector:@selector(showAnglesButtonTapped)];
         showAnglesButton.position = ccp(-200, 50);
         
-        CCMenuItem * showSameAngleButton = [CCMenuItemImage itemWithNormalImage:@"sameAngleButton.png" selectedImage:@"sameAngleButton.png" target:self selector:@selector(showSameAngleButtonTapped)];
+        CCMenuItem * showSameAngleButton = [CCMenuItemImage itemWithNormalImage:@"sameAngleButton.png" selectedImage:@"sameAngleButton.png" target:self selector:@selector(showSameAnglesButtonTapped)];
         showSameAngleButton.position = ccp(10, 50);
         
         CCMenuItem * showSideLengthsButton = [CCMenuItemImage itemWithNormalImage:@"showSideLengthsButton.png" selectedImage:@"showSideLengthsButton.png" target:self selector:@selector(showSideLengthsButtonTapped)];
@@ -221,17 +221,19 @@
 
 -(void)addPinButtonTapped {
     if ([pinboard isKindOfClass:[CircularPinboard class]]) {
-        [self clearPinboardSprites];
-        circularNumberOfPins++;
-        pinboard = [CircularPinboard pinboardWithCentre:circularIncludeCentre pins:circularNumberOfPins];
-        [self setupPinboard];
+        if (circularNumberOfPins < 20) {
+            [self clearPinboardSprites];
+            circularNumberOfPins++;
+            pinboard = [CircularPinboard pinboardWithCentre:circularIncludeCentre pins:circularNumberOfPins];
+            [self setupPinboard];
+        }
     }
 }
 
 -(void)minusPinButtonTapped {
     if ([pinboard isKindOfClass:[CircularPinboard class]]) {
         if (circularNumberOfPins > 3) {
-        [self clearPinboardSprites];
+            [self clearPinboardSprites];
             circularNumberOfPins = circularNumberOfPins - 1;
             pinboard = [CircularPinboard pinboardWithCentre:circularIncludeCentre pins:circularNumberOfPins];
             [self setupPinboard];
@@ -264,7 +266,13 @@
 }
 
 -(void)showAnglesButtonTapped {
-    [pinboard showAngles];
+    [pinboard setCurrentBandAngleDisplay:@"angles"];
+    [pinboard recalculateSameAngles];
+}
+
+-(void)showSameAnglesButtonTapped {
+    [pinboard setCurrentBandAngleDisplay:@"sameAngles"];
+    [pinboard recalculateSameAngles];
 }
 
 -(void)showSideLengthsButtonTapped {

@@ -27,6 +27,7 @@
 @property (readwrite) CCNode * propertiesNode;
 @property (readwrite) NSMutableArray * sideLengths;
 @property (readwrite) NSString * sideDisplay;
+@property (readwrite) NSString * angleDisplay;
 @property (readwrite) NSMutableArray * sameSideLengthNotches;
 @property (readwrite) NSMutableArray * parallelSideArrows;
 
@@ -38,12 +39,13 @@
 -(void)pinBandOnPin:(Pin *)pin;
 -(void)setupBand;
 -(void)removeMovingPin;
--(void)showAngles;
 -(NSString *)regular;
 -(NSString *)shape;
 -(void)displaySides;
+-(void)toggleAngleDisplay:(NSString *)angleDisplay;
 -(void)toggleSideDisplay:(NSString *)sideDisplay;
 -(void)clearSameSideLengthNotches;
 -(void)clearParallelSideArrows;
+-(void)recalculateAngles;
 
 @end

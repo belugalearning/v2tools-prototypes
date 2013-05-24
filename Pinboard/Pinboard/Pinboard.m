@@ -91,6 +91,7 @@
         [self setPropertyIndicatorsFor:movingBand];
         [self recalculateSameSideLengths];
         [self recalculateParallelSides];
+        [self recalculateSameAngles];
     }
     movingBand = nil;
 }
@@ -131,9 +132,9 @@
     }
 }
 
--(void)showAngles {
+-(void)setCurrentBandAngleDisplay:(NSString *)angleDisplay {
     Band * band = [self.bands objectAtIndex:0];
-    [band showAngles];
+    [band toggleAngleDisplay:angleDisplay];
 }
 
 -(void)setCurrentBandSideDisplay:(NSString *)sideDisplay {
@@ -150,6 +151,34 @@
 
 -(float)unitDistance {
     return 0;
+}
+
+-(void)recalculateSameAngles {
+    for (Band * band in self.bands) {
+        [band recalculateAngles];
+    }
+    NSMutableArray * angles = [self allAnglesWithAngleDisplay:@"sameAngles"];
+    int numberOfArcs = 1;
+    while ([angles count] > 0) {
+        Angle * angle = [angles objectAtIndex:0];
+        NSMutableArray * sameAngles = [NSMutableArray array];
+        [sameAngles addObject:angle];
+        for (int i = 1; i < [angles count]; i++) {
+            Angle * otherAngle = [angles objectAtIndex:i];
+            if (ABS(angle.throughAngle - otherAngle.throughAngle) < 0.001) {
+                [sameAngles addObject:otherAngle];
+            }
+        }
+        if ([sameAngles count] > 1) {
+            for (Angle * angle in sameAngles) {
+                [angle setToDrawArcs:numberOfArcs];
+            }
+            numberOfArcs++;
+        }
+        for (Angle * angle in sameAngles) {
+            [angles removeObject:angle];
+        }
+    }
 }
 
 -(void)recalculateSameSideLengths {
@@ -213,10 +242,21 @@
     }
 }
 
+-(NSMutableArray *)allAnglesWithAngleDisplay:(NSString *)angleDisplay {
+    NSMutableArray * angles = [NSMutableArray array];
+    for (Band * band in self.bands) {
+        if ([band.angleDisplay isEqualToString:angleDisplay]) {
+            if ([band.pins count] > 2) {
+                [angles addObjectsFromArray:band.angles];
+            }
+        }
+    }
+    return angles;
+}
+
 -(NSMutableArray *)allBandPartsWithSideDisplay:(NSString *)sideDisplay {
-    NSMutableArray * allBands = self.bands;
     NSMutableArray * bandParts = [NSMutableArray array];
-    for (Band * band in allBands) {
+    for (Band * band in self.bands) {
         if ([band.sideDisplay isEqualToString:sideDisplay]) {
             [band clearSameSideLengthNotches];
             [band clearParallelSideArrows];
